@@ -1,58 +1,137 @@
-\documentclass[oneside]{ritthesis}
+% This class inherits from the LaTeX standard report class and should support
+% all of the options supported by it, as well as a few extra. These extra
+% options are:
+% singlespacing, onehalfspacing, doublespacing
+% Only one should be used at a time, and the default is doublespacing
+\documentclass{ritthesis}
 
+%%%%%%%%%%%%%%%%%%%%
+%%%%% Packages %%%%%
+%%%%%%%%%%%%%%%%%%%%
+% Used for filler text but will almost certainly be of no use in a real thesis
 \usepackage{lipsum}
+% Generally you will want to use the graphicx package to display images
 \usepackage{graphicx}
-\graphicspath{{images/}}
 
+% Use these commands to set up the author, title, and date
 \author{Matthew J. Filmer}
-\title{A long version of the title for this RIT Microelectronic Engineering Thesis Document Class for \LaTeX{}}
-\date{\today}
+% You most likely need to insert a line break or two to make the title wrap
+% more evenly
+\title{A \LaTeX{} Document Class for a Masters Thesis\\in Microelectronic Engineering at RIT}
+\date{June 23, 2014}
 
-\advisor{Dr. Sean Rommel}
-\advisor{Dr. Robert J. Smith III}
-\specialcommittee{Friend}{Dr. Theodore Jones XXXVIII}{King of the Committee}
-\committee{Dr. Santosh Kurinec}
-\committee{Dr. Karl Hirschman}
-\committee{Dr. Geroge van Rosenbergeson}
+% You can further customize the apperance of the title and author by
+% uncommenting and changing:
+% \makeatletter
+% \renewcommand{\displaytitle}{\textbf{\large\@title}}
+% \renewcommand{\displayauthor}{\textsc{\@author}}
+% \makeatother
 
+% There are also a bunch of other commands that can be changed, were this not
+% a masters thesis in microelectronic engineering at RIT. Those would be the
+% following:
+% \renewcommand{\universityname}{Rochester Institute of Technology}
+% \renewcommand{\collegename}{Kate Gleason College of Engineering}
+% \renewcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
+% \renewcommand{\logo}{kgcoelogo}
+% \renewcommand{\degreename}{Master of Science}
+% \renewcommand{\degreefield}{Microelectronic Engineering}
+
+% Each of these commands can be repeated as many times as necessary
+% Used to create the lines on the signature sheet
+\advisor{Dr. Joe Smith}
+\committee{Dr. Philip Jones}
+% Note, the following line makes the signature area overflow and should
+% generally be shortened. This is probably an extreme case anyway.
+\specialcommittee{Bystander}{Mr. Robert van Rosenson XXXVIII}{King of the Committee}
+
+% You can customize the length of the signature line by uncommenting and
+% changing the following line. The default is 20em, and is close to the maximum
+% line length
+%\renewcommand{\siglinelength}{20em}
+
+% Begin the document, the way you always do in LaTeX
 \begin{document}
+
+% This starts the pages that get roman numerals at the beginning of the
+% document. Generally is the first thing in the document. 
 \makefrontmatter
 
+% Instead of \makefrontmatter it is possible to do what thath macro does
+% manually, if more control was desired. If that is the case, uncomment and
+% change, or just use the individual macros:
+% \renewcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\makecopyrightpage}
+% Each of these commands can also be changed, but for details on that you
+% should look in ritthesis.cls to see how they are defined
+
+% The acknowledgments environment will create an acknowledgments section,
+% complete with a correctly spelled title
 \begin{acknowledgments}
 \lipsum[4-6]
 \end{acknowledgments}
 
+% The abstract environment is very similar to the acknowledgments environment
+% and is used the same
 \begin{abstract}
-Here is an example of an abstract. It should be most of a page. Again, first paragraph isn't indented per \LaTeX{}'s standard practice. 
-
 \lipsum[1-2] 
 \end{abstract}
 
+% Makes the table of contents, list of tables, and list of figures, in that
+% order. This command makes a table of contents entry for each of these lists
 \makealllists
 
+% The \mainmatter macro starts the main matter. This starts arabic numbering,
+% and adds a header (except on the first page of a chapter). 
 \mainmatter
+
+% This class uses the fancyhdr package to build the headers. You could probably
+% customize the headers by changing the plain page style, as well as the fancy
+% page style. There is no guarantee anything you do works though. (In fact,
+% there isn't even a guarantee anything in ritthesis.cls works either)
+
+% Likewise, the chapter and section headers are formatted using the titlesec
+% package. You should be able to customize them by using that package's
+% commands, specifically \titleformat
+
+% Begin new chapters the way you always do it LaTeX
 \chapter{Doing things the hard way}
+
+% Same goes for sections
 \section{First sections aren't as much fun as first comments}
 The first paragraph in a chapter\footnote{and probably section} is not indented. I can probably change this, but it is the \LaTeX{} default. Here is an example of an equation, it is numbered within the chapter. 
+
+% Equations are numbered within chapters. Change the way you normally do
 \begin{equation}
 \pi\times r^2
 \label{equ:area}
 \end{equation}
+
 \section{second section!}
+
 \subsection{subsection}
+
+% I don't think most people will use paragraph and subparagraph. But they are
+% included here for completeness
 \paragraph{paragraph}
+
 \subparagraph{subparagraph}
+
 \lipsum{}
 \chapter{Everyone knows, the second chapter is the best chapter}
 \lipsum{}
+
+% Also include figures the normal way, using the graphicx package, or however
+% you choose to do it
 \begin{figure}
 \centering
 \includegraphics{kgcoelogo}
 \caption{trust me, this is a figure}
 \label{fig:samp}
 \end{figure}
+
 some more\footnote{aoeu} text
 
+% Tables are unchanged as well
 \begin{table}
 \centering
 \caption{example of a table}
@@ -69,17 +148,33 @@ a		& b\\
 \end{tabular}
 \end{table}
 
+% Citing some stuff
 \nocite{cheung,zhao,cao,zhang}
+
+% Citing everything
 \nocite{*}
 
+% Making the bibliography, using the IEEE format. By default the IEEE format
+% won't replace author's names with et al., even when there are a lot of
+% authors. Consult the IEEE LaTeX format documentation for how to change that
 \bibliographystyle{IEEEtran}
-\bibliography{test}
+\bibliography{example}
 
+% \appendix begins the appendicies. If you have just one appendix, it should
+% technically be just "Appendix" not "Appendix A" and should be referred to in
+% the text as "the appendix". I think there might be an appendix environment
+% as a part of the report class for if you just have one appendix. Consult the
+% internet on this one.
 \appendix
+
+% Begin a new appendix by starting new chapters
 \chapter{Sample Appendix}
+
+% You can make sections in appendicies, but I don't think many people will
 \section{test section -- probably not necessary}
 \lipsum[6-9]
 \chapter{Another Sample Appendix}
 \lipsum[10-11]
 
+% and finally, end the document
 \end{document}
