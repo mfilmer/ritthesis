@@ -1,0 +1,85 @@
+\documentclass[oneside]{ritthesis}
+
+\usepackage{lipsum}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\author{Matthew J. Filmer}
+\title{A long version of the title for this RIT Microelectronic Engineering Thesis Document Class for \LaTeX{}}
+\date{\today}
+
+\advisor{Dr. Sean Rommel}
+\advisor{Dr. Robert J. Smith III}
+\specialcommittee{Friend}{Dr. Theodore Jones XXXVIII}{King of the Committee}
+\committee{Dr. Santosh Kurinec}
+\committee{Dr. Karl Hirschman}
+\committee{Dr. Geroge van Rosenbergeson}
+
+\begin{document}
+\makefrontmatter
+
+\begin{acknowledgments}
+\lipsum[4-6]
+\end{acknowledgments}
+
+\begin{abstract}
+Here is an example of an abstract. It should be most of a page. Again, first paragraph isn't indented per \LaTeX{}'s standard practice. 
+
+\lipsum[1-2] 
+\end{abstract}
+
+\makealllists
+
+\mainmatter
+\chapter{Doing things the hard way}
+\section{First sections aren't as much fun as first comments}
+The first paragraph in a chapter\footnote{and probably section} is not indented. I can probably change this, but it is the \LaTeX{} default. Here is an example of an equation, it is numbered within the chapter. 
+\begin{equation}
+\pi\times r^2
+\label{equ:area}
+\end{equation}
+\section{second section!}
+\subsection{subsection}
+\paragraph{paragraph}
+\subparagraph{subparagraph}
+\lipsum{}
+\chapter{Everyone knows, the second chapter is the best chapter}
+\lipsum{}
+\begin{figure}
+\centering
+\includegraphics{kgcoelogo}
+\caption{trust me, this is a figure}
+\label{fig:samp}
+\end{figure}
+some more\footnote{aoeu} text
+
+\begin{table}
+\centering
+\caption{example of a table}
+\label{tab:samp}
+\begin{tabular}{cc}
+\hline
+a		& b\\
+\hline
+1		& 5\\
+2		& 9\\
+3		& 2\\
+4		& 2\\
+\hline
+\end{tabular}
+\end{table}
+
+\nocite{cheung,zhao,cao,zhang}
+\nocite{*}
+
+\bibliographystyle{IEEEtran}
+\bibliography{test}
+
+\appendix
+\chapter{Sample Appendix}
+\section{test section -- probably not necessary}
+\lipsum[6-9]
+\chapter{Another Sample Appendix}
+\lipsum[10-11]
+
+\end{document}
