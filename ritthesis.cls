@@ -142,8 +142,6 @@
 \newcommand{\displaytitle}{\textbf{\large\@title}}
 \newcommand{\displayauthor}{\textsc{\@author}}
 \newcommand{\maketitlepage}{
-	\phantomsection
-	\addcontentsline{toc}{chapter}{Title Page}
 	\thispagestyle{plain}
 	\hrule
 	\begin{center}
@@ -173,7 +171,7 @@
 }
 \newcommand{\makesignaturepage}{
 	\phantomsection
-	\addcontentsline{toc}{chapter}{Signature Page}
+	\addcontentsline{toc}{chapter}{Signature Sheet}
 	\thispagestyle{plain}
 	\begin{doublespace}
 	\begin{center}
@@ -280,10 +278,11 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
 
 % Committee members
+\newcommand{\siglinelength}{20em}
 \newcommand{\@committeetable}{}
 \newcommand{\specialcommittee}[3]{\g@addto@macro\@committeetable{
 	\\
-	& #1	& \rule{20em}{0.7pt}\\
+	& #1	& \rule{\siglinelength}{0.7pt}\\
 	&		& #2 \textit{#3}\\
 }}
 \newcommand{\advisor}[1]{\specialcommittee{Prof.}{#1}{Advisor}}
