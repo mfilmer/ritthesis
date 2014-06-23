@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ritthesis}[2014/06/20]
+\ProvidesClass{ritthesis}[2014/06/23]
 
 
 %%%%% Handle Options %%%%%
