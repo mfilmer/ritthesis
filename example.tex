@@ -33,22 +33,23 @@
 % \renewcommand{\universityname}{Rochester Institute of Technology}
 % \renewcommand{\collegename}{Kate Gleason College of Engineering}
 % \renewcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
-% \renewcommand{\logo}{kgcoelogo}
+% \renewcommand{\logo}{kgcoelogohoriz}
 % \renewcommand{\degreename}{Master of Science}
 % \renewcommand{\degreefield}{Microelectronic Engineering}
 
 % Each of these commands can be repeated as many times as necessary
-% Used to create the lines on the signature sheet
-\advisor{Dr. Joe Smith}
-\committee{Dr. Philip Jones}
+% Used to create the lines on the signature sheet. There is an optional first
+% argument for each of these to specify title (the default is Dr.)
+\advisor{Joe}{Smith}
+\committee{Philip}{Jones}
 % Note, the following line makes the signature area overflow and should
 % generally be shortened. This is probably an extreme case anyway.
-\specialcommittee{Bystander}{Mr. Robert van Rosenson XXXVIII}{King of the Committee}
+\specialcommittee[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
 
 % You can customize the length of the signature line by uncommenting and
-% changing the following line. The default is 20em, and is close to the maximum
+% changing the following line. The default is 25em, and is close to the maximum
 % line length
-%\renewcommand{\siglinelength}{20em}
+%\renewcommand{\siglinelength}{25em}
 
 % Begin the document, the way you always do in LaTeX
 \begin{document}
@@ -124,7 +125,7 @@ The first paragraph in a chapter\footnote{and probably section} is not indented.
 % you choose to do it
 \begin{figure}
 \centering
-\includegraphics{kgcoelogo}
+\includegraphics{kgcoelogohoriz}
 \caption{trust me, this is a figure}
 \label{fig:samp}
 \end{figure}
@@ -157,6 +158,12 @@ a		& b\\
 % Making the bibliography, using the IEEE format. By default the IEEE format
 % won't replace author's names with et al., even when there are a lot of
 % authors. Consult the IEEE LaTeX format documentation for how to change that
+% Also, the bibliography won't show up in the toc unless you create a
+% phantom section and add a toc entry. Use a \cleardoublepage first or the toc
+% entry will usually point to the wrong page.
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{IEEEtran}
 \bibliography{example}
 

@@ -121,7 +121,7 @@
 % Masters theses at RIT must all be double spaced and look awful
 \RequirePackage{geometry}
 \RequirePackage{titlesec}
-\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[hidelinks,hyperfootnotes=false]{hyperref}
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
@@ -134,27 +134,28 @@
 \newcommand{\universityname}{Rochester Institute of Technology}
 \newcommand{\collegename}{Kate Gleason College of Engineering}
 \newcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
-\newcommand{\logo}{kgcoelogo}
+\newcommand{\logo}{kgcoelogohoriz}
 \newcommand{\degreename}{Master of Science}
 \newcommand{\degreefield}{Microelectronic Engineering}
 
 % Commands for making the frontmatter
-\newcommand{\displaytitle}{\textbf{\large\@title}}
+\newcommand{\displaytitle}{\textbf{\Large\@title}}
 \newcommand{\displayauthor}{\textsc{\@author}}
 \newcommand{\maketitlepage}{
-	\thispagestyle{plain}
+	\thispagestyle{empty}
 	\hrule
 	\begin{center}
 		\
-		\vspace{5em}
+		\vfill
 		
 		\displaytitle
 		
-		\displayauthor
+		\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
 		
 		\vfill
+		\vfill
 		
-		\includegraphics{\logo}
+		\includegraphics[width=15em]{\logo}
 		
 		\vfill
 		
@@ -164,7 +165,8 @@
 		
 		\textit\universityname
 		
-		\vspace{5em}
+		\vfill
+		\
 	\end{center}
 	\hrule
 	{\clearpage\pagestyle{plain}\cleardoublepage}
@@ -247,8 +249,8 @@
 }
 \newcommand{\makecommitteetable}{
 	\begin{singlespace}
-	\begin{tabular}{rrl}
-	Approved By:
+	\begin{tabular}{rl}
+	Approved By:\\
 				\@committeetable
 	\end{tabular}
 	\end{singlespace}
@@ -278,15 +280,20 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
 
 % Committee members
-\newcommand{\siglinelength}{20em}
+\newcommand{\siglinelength}{25em}
 \newcommand{\@committeetable}{}
-\newcommand{\specialcommittee}[3]{\g@addto@macro\@committeetable{
+\newcommand{\specialcommittee}[5][Dr.]{\g@addto@macro\@committeetable{
 	\\
-	& #1	& \rule{\siglinelength}{0.7pt}\\
-	&		& #2 \textit{#3}\\
+	#2	& \rule{\siglinelength}{0.7pt}\\
+		& #1 #3 #4 \textit{#5}\\
 }}
-\newcommand{\advisor}[1]{\specialcommittee{Prof.}{#1}{Advisor}}
-\newcommand{\committee}[1]{\specialcommittee{Prof.}{#1}{Committee Member}}
+\newcommand{\advisor}[3][Dr.]{
+	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
+	\specialcommittee[#1]{Prof.}{#2}{#3}{Advisor}
+}
+\newcommand{\committee}[3][Dr.]{
+	\specialcommittee[#1]{Prof.}{#2}{#3}{Committee Member}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Environments %%%%%
