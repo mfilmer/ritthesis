@@ -13,7 +13,7 @@
 # *.ps
 # *.eps
 # *.pdf
-documentation.pdf
+example.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

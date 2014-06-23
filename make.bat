@@ -1,10 +1,10 @@
 @echo off
 
 if %1.==. (
-	pdflatex documentation
-	bibtex documentation
-	pdflatex documentation
-	pdflatex documentation
+	pdflatex example
+	bibtex example
+	pdflatex example
+	pdflatex example
 )
 
 if %1==clean (
