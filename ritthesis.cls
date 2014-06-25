@@ -295,6 +295,15 @@
 	\specialcommittee[#1]{Prof.}{#2}{#3}{Committee Member}
 }
 
+% Bibliography
+\newcommand{\makebibliography}[1]{ %
+	\cleardoublepage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Bibliography}
+	\bibliographystyle{IEEEtran}
+	\bibliography{#1}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Environments %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
