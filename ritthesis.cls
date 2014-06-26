@@ -152,8 +152,7 @@
 		
 		\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
 		
-		\vfill
-		\vfill
+		\vfill\vfill
 		
 		\includegraphics[width=15em]{\logo}
 		
