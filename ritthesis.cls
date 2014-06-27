@@ -256,6 +256,7 @@
 }
 
 % Chapter headings
+\setcounter{secnumdepth}{3}
 \titleformat{\chapter}[display]
 	{\normalfont\bfseries}
 	{\LARGE{\chaptertitlename{} \thechapter}}
@@ -264,6 +265,7 @@
 	[\vspace{0.5em}]
 \titleformat*{\section}{\normalfont\large\bfseries}
 \titleformat*{\subsection}{\normalfont\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 \titleformat{name=\chapter,numberless}[display]
 	{\bfseries}
 	{}
