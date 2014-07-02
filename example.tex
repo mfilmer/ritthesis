@@ -82,6 +82,47 @@
 % order. This command makes a table of contents entry for each of these lists
 \makealllists
 
+% Here you can generate a list of symbols, or a list of abbreviations, or whatever
+% other custom lists you may desire. These lists are built using the longtable
+% environment, and takes similar arguments
+% You can change the list of symbols name by either uncommenting the following line
+% and making the desired change, or by providing the optional argument to the
+% listofsymbols environment
+%\renewcommand{\listofsymbname}{List of Symbols}
+% The first argument is column alignment options and uses the same syntax as the
+% argument for the longtable environment (which is similar to the tabular environment)
+% The second argument is the column headers, separated by ailgnment characters (&)
+% If you want multiple extra tables, such as a table of acronyms, and a table of symbols
+% you can just use this environment multiple times, with different names
+\begin{listofsymbols}[List of Symbols]{lp{0.6\linewidth}r}{Term & Description & Units/Value}
+$C_D^\prime$ 	& Depletion region capacitance per unit area 			& F/cm\textsuperscript{2}\\
+$C_{ox}^\prime$ & Oxide capacitance per unit area 						& F/cm\textsuperscript{2}\\
+$\mathcal{E}$	& Electric field 										& V/cm\\
+$E_c$ 			& Energy at the conduction band edge 					& eV\\
+$E_F$			& Fermi level											& eV\\
+$E_g$			& Band gap energy 										& eV\\
+$E_v$ 			& Energy at the valence band edge 						& eV\\
+$E_x, E_y$		& Electric field normal and parallel to the gate		& V/cm\\
+$\hbar$			& Reduced Planck constant 								& $6.582\times 10^{-16}$ eV$\cdot$s\\
+$I_D$			& Drain current											& A\\
+$J_t$			& Band to band tunneling current density 				& A/cm\textsuperscript{2}\\
+$k$				& Boltzmann's constant 									& $8.617\times 10^{-5}$ eV/K\\
+$m^*$			& Carrier effective mass 								& kg\\
+$N_A$			& Acceptor concentration 								& cm\textsuperscript{-3}\\
+$N_c$			& Effective density of states in the conduction band 	& cm\textsuperscript{-3}\\
+$n_i$ 			& Intrinsic carrier concentration						& cm\textsuperscript{-3}\\
+$q$				& Elementary charge  									& $1.602\times 10^{-19}$ C\\
+$S$ 			& Subthreshold swing 									& V/dec\\
+$T$				& Temperature											& K\\
+$V_{DS}$		& Drain--Source voltage 								& V\\
+$V_{eff}$		& Effective reverse bias voltage						& V\\
+$V_{FB}$ 		& Flatband voltage 										& V\\
+$V_G$ 			& Gate voltage 											& V\\
+$\epsilon_s$	& Permittivity of a semiconductor 						& F/cm\\
+$\mu_n, \mu_p$  & Mobility of electrons and holes respectively 			& cm/V$\cdot$s\\
+$\Psi_s$ 		& Surface potential										& V\\
+\end{listofsymbols}
+
 % The \mainmatter macro starts the main matter. This starts arabic numbering,
 % and adds a header (except on the first page of a chapter). 
 \mainmatter

@@ -125,6 +125,8 @@
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
+\RequirePackage{longtable}
+\RequirePackage{booktabs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Commands %%%%%
@@ -309,23 +311,48 @@
 %%%%% Custom Environments %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewenvironment{abstract}
-	{\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{Abstract}
-	\pagestyle{plain}
-	\begin{center}
-		\textbf{\large{}Abstract}
-	\end{center}}
+	{
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{\abstractname}
+		\pagestyle{plain}
+		\begin{center}
+			\textbf{\large{}\abstractname}
+		\end{center}
+	}
 	{\cleardoublepage}
+
+\newcommand{\acknowledgmentsname}{Acknowledgments}
 \newenvironment{acknowledgments}
-	{\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{Acknowledgments}
-	\pagestyle{plain}
-	\begin{center}
-		\textbf{\large{}Acknowledgments}
-	\end{center}}
+	{
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{\acknowledgmentsname}
+		\pagestyle{plain}
+		\begin{center}
+			\textbf{\large{}\acknowledgmentsname}
+		\end{center}
+	}
 	{\cleardoublepage}
+
+\newcommand{\listofsymbname}{List of Symbols}
+\newenvironment{listofsymbols}[3][\listofsymbname]
+	{
+		\cleardoublepage
+		\chapter*{#1}
+		\phantomsection
+		\addcontentsline{toc}{chapter}{#1}
+		\pagestyle{plain}
+		\centering
+		\begin{longtable}{#2}
+			\toprule
+			#3\\
+			\midrule
+			\endhead
+			\bottomrule
+			\endfoot
+	}
+	{\end{longtable}\cleardoublepage}
 
 % Done
 \endinput
