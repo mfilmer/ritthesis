@@ -12,6 +12,9 @@
 \usepackage{lipsum}
 % Generally you will want to use the graphicx package to display images
 \usepackage{graphicx}
+% You can set the graphicspath if you want to use pictures no in the same
+% directory as the .tex file
+%\graphicspath{{images\}}
 
 % Use these commands to set up the author, title, and date
 \author{Matthew J. Filmer}
@@ -26,7 +29,7 @@
 % \renewcommand{\displaytitle}{\textbf{\large\@title}}
 % \renewcommand{\displayauthor}{\textsc{\@author}}
 % \makeatother
-% But I like small caps, so this is how I made it
+% But I like small caps, so that is how I made it
 
 % There are also a bunch of other commands that can be changed, were this not
 % a masters thesis in microelectronic engineering at RIT. Those would be the
@@ -67,13 +70,15 @@
 % should look in ritthesis.cls to see how they are defined
 
 % The acknowledgments environment will create an acknowledgments section,
-% complete with a correctly spelled title
+% complete with a correctly spelled title. Change the following to rename
+%\renewcommand{\acknowledgmentsname}{Acknowledgments}
 \begin{acknowledgments}
 \lipsum[4-6]
 \end{acknowledgments}
 
 % The abstract environment is very similar to the acknowledgments environment
-% and is used the same
+% and is used the same. Change the following to rename
+%\renewcommand{\abstractname}{Abstract}
 \begin{abstract}
 \lipsum[1-2] 
 \end{abstract}
