@@ -304,7 +304,9 @@
 	\phantomsection
 	\addcontentsline{toc}{chapter}{Bibliography}
 	\bibliographystyle{IEEEtran}
-	\bibliography{#1}
+	\begin{singlespace}
+		\bibliography{#1}
+	\end{singlespace}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
