@@ -198,6 +198,9 @@ a		& b\\
 \end{tabular}
 \end{table}
 
+\chapter{Example chapter with an excessively long title such that it might be forced to break. Apparently it works}
+\lipsum[8-12]
+
 % Citing some stuff
 \nocite{cheung,zhao,cao,zhang}
 
@@ -208,6 +211,14 @@ a		& b\\
 % won't replace author's names with et al., even when there are a lot of
 % authors. Consult the IEEE LaTeX format documentation for how to change that
 \makebibliography{example}
+
+% The theappendix environment is used when there is only one appendix.
+% Otherwise use \appendix. Do not use both the theappendix environment
+% and \appendix
+\begin{theappendix}{Single appendix title}
+	\section{stuff}
+	\lipsum[15-21]
+\end{theappendix}
 
 % \appendix begins the appendicies. If you have just one appendix, it should
 % technically be just "Appendix" not "Appendix A" and should be referred to in
@@ -221,7 +232,7 @@ a		& b\\
 
 % You can make sections in appendicies, but I don't think many people will
 \section{test section -- probably not necessary}
-\lipsum[6-9]
+\lipsum[6-12]
 \chapter{Another Sample Appendix}
 \lipsum[10-11]
 

@@ -365,5 +365,22 @@
 	}
 	{\end{longtable}\cleardoublepage}
 
+\newenvironment{theappendix}[1]
+	{
+		\titleformat{\chapter}[display]
+		{\normalfont\bfseries}
+		{\LARGE{\chaptertitlename{}}}
+		{0em}
+		{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
+		[\vspace{0.5em}]
+		
+		\appendix
+		\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{}: ##1}{}}
+		\chapter{#1}
+	}
+	{
+		\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. ##1}{}}
+	}
+
 % Done
 \endinput
