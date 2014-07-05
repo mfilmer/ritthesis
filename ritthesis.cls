@@ -99,13 +99,22 @@
 	\AtEndOfClass{\doublespacing}
 }
 
+\newcommand{\bibspacing}{singlespace}
+% Bibliography line spacing
+\DeclareOption{singlespacebib}{ %
+	\renewcommand{\bibspacing}{singlespace}
+}
+\DeclareOption{doublespacebib}{ %
+	\renewcommand{\bibspacing}{doublespace}
+}
+
 % Fallback
 \DeclareOption*{
 	\ClassWarning{ritthesis}{Unknown option '\CurrentOption'}
 }
 
 % Default options
-\ExecuteOptions{12pt,oneside,doublespacing}
+\ExecuteOptions{12pt,oneside,doublespacing,singlespacebib}
 
 % Process options
 \ProcessOptions\relax
@@ -304,9 +313,9 @@
 	\phantomsection
 	\addcontentsline{toc}{chapter}{Bibliography}
 	\bibliographystyle{IEEEtran}
-	\begin{singlespace}
+	\begin{\bibspacing}
 		\bibliography{#1}
-	\end{singlespace}
+	\end{\bibspacing}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
