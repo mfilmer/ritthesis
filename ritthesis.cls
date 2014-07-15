@@ -130,12 +130,13 @@
 % Masters theses at RIT must all be double spaced and look awful
 \RequirePackage{geometry}
 \RequirePackage{titlesec}
-\RequirePackage[hidelinks,hyperfootnotes=false]{hyperref}
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
+\RequirePackage[font=small]{caption}
+\RequirePackage[hidelinks,hyperfootnotes=false]{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Commands %%%%%
