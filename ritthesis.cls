@@ -135,7 +135,7 @@
 \pagestyle{fancy}
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
-\RequirePackage[font=small]{caption}
+\RequirePackage[font=small,labelfont=bf]{caption}
 \RequirePackage[hidelinks,hyperfootnotes=false]{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
