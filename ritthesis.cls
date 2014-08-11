@@ -347,6 +347,19 @@
 	}
 	{\cleardoublepage}
 
+\newcommand{\dedicationname}{Dedication}
+\newenvironment{dedication}
+	{
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{\dedicationname}
+		\pagestyle{plain}
+		\begin{center}
+			\textbf{\large{}\dedicationname}
+		\end{center}
+	}
+	{\cleardoublepage}
+
 \newcommand{\listofsymbname}{List of Symbols}
 \newenvironment{listofsymbols}[3][\listofsymbname]
 	{
