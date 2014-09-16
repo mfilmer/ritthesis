@@ -1,4 +1,4 @@
-\NeedsTeXFormat{LaTeX2e}
+	\NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ritthesis}[2014/06/23]
 
 
@@ -354,11 +354,9 @@
 		\phantomsection
 		\addcontentsline{toc}{chapter}{\dedicationname}
 		\pagestyle{plain}
-		\begin{center}
-			\textbf{\large{}\dedicationname}
-		\end{center}
+		\ \vfill
 	}
-	{\cleardoublepage}
+	{\vfill\cleardoublepage}
 
 \newcommand{\listofsymbname}{List of Symbols}
 \newenvironment{listofsymbols}[3][\listofsymbname]
