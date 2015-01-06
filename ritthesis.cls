@@ -219,7 +219,7 @@
 		
 		\vfill
 		
-		A Thesis Submitted
+		A Thesis \if@proposal Proposal\fi{} Submitted
 		
 		In Partial Fulfillment
 		
