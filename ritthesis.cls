@@ -1,8 +1,12 @@
 	\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ritthesis}[2014/06/23]
-
+\ProvidesClass{ritthesis}[2015/01/06]
 
 %%%%% Handle Options %%%%%
+% Create conditionals
+\newif\if@twoside
+\newif\if@proposal
+
+
 % Font Size
 \DeclareOption{10pt}{
 	\PassOptionsToClass{\CurrentOption}{report}
@@ -54,38 +58,13 @@
 % One or two sided printing
 \DeclareOption{oneside}{
 	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToPackage{left=1.5in, right=1in, top=1in, bottom=1in}{geometry}
-	\AtEndOfClass{
-		\fancyhf{}
-		\fancyfoot[R]{\thepage}
-		\fancyhead[L]{\footnotesize\textbf\leftmark}
-		\renewcommand{\headrulewidth}{0.7pt}
-		\fancypagestyle{plain}{%
-			\fancyhf{}
-			\fancyfoot[R]{\thepage}
-			\renewcommand{\headrulewidth}{0pt}
-			\renewcommand{\footrulewidth}{0pt}
-		}
-		\pagestyle{fancy}
-	}
+
+	\@twosidefalse
 }
 \DeclareOption{twoside}{
 	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToPackage{inner=1.5in, outer=1in, top=1in, bottom=1in}{geometry}
-	\AtEndOfClass{
-		\fancyhf{}
-		\fancyfoot[LE,RO]{\thepage}
-		\fancyhead[RO]{\footnotesize\textbf\rightmark}
-		\fancyhead[LE]{\footnotesize\textbf\leftmark}
-		\renewcommand{\headrulewidth}{0.7pt}
-		\fancypagestyle{plain}{%
-			\fancyhf{}
-			\fancyfoot[LE,RO]{\thepage}
-			\renewcommand{\headrulewidth}{0pt}
-			\renewcommand{\footrulewidth}{0pt}
-		}
-		\pagestyle{fancy}
-	}
+
+	\@twosidetrue
 }
 
 % Line spacing
@@ -108,6 +87,11 @@
 	\renewcommand{\bibspacing}{doublespace}
 }
 
+% Format as a proposal rather than a thesis
+\DeclareOption{proposal}{
+	\@proposaltrue
+}
+
 % Fallback
 \DeclareOption*{
 	\ClassWarning{ritthesis}{Unknown option '\CurrentOption'}
@@ -118,6 +102,47 @@
 
 % Process options
 \ProcessOptions\relax
+
+%%%%% Set up environment based on options %%%%%
+\AtEndOfClass{\fancyhf{}}
+\if@proposal
+	\PassOptionsToPackage{left=1in, right=1in, top=1in, bottom=1in}{geometry}
+	\AtEndOfClass{
+		\fancyfoot[C]{\thepage}
+		\renewcommand{\headrulewidth}{0pt}
+	}
+\else
+	% One or two sided prining (matters for binding purposes)
+	\if@twoside
+		\PassOptionsToPackage{inner=1.5in, outer=1in, top=1in, bottom=1in}{geometry}
+		\AtEndOfClass{
+			\fancyfoot[LE,RO]{\thepage}
+			\fancyhead[RO]{\footnotesize\textbf\rightmark}
+			\fancyhead[LE]{\footnotesize\textbf\leftmark}
+			\renewcommand{\headrulewidth}{0.7pt}
+			\fancypagestyle{plain}{%
+				\fancyhf{}
+				\fancyfoot[LE,RO]{\thepage}
+				\renewcommand{\headrulewidth}{0pt}
+				\renewcommand{\footrulewidth}{0pt}
+			}
+		}
+	\else
+		\PassOptionsToPackage{left=1.5in, right=1in, top=1in, bottom=1in}{geometry}
+		\AtEndOfClass{
+			\fancyfoot[R]{\thepage}
+			\fancyhead[L]{\footnotesize\textbf\leftmark}
+			\renewcommand{\headrulewidth}{0.7pt}
+			\fancypagestyle{plain}{%
+				\fancyhf{}
+				\fancyfoot[R]{\thepage}
+				\renewcommand{\headrulewidth}{0pt}
+				\renewcommand{\footrulewidth}{0pt}
+			}
+		}
+	\fi
+\fi
+\AtEndOfClass{\pagestyle{fancy}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Load Base Class %%%%%
@@ -245,7 +270,11 @@
 	\end{doublespace}
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 }
-\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\makecopyrightpage}
+\if@proposal
+	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage}
+\else
+	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\makecopyrightpage}
+\fi
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 \newcommand{\makealllists}{%
 	\phantomsection
