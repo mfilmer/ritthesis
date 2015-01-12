@@ -173,6 +173,7 @@
 \newcommand{\collegename}{Kate Gleason College of Engineering}
 \newcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
 \newcommand{\logo}{kgcoelogohoriz}
+\newcommand{\documentname}{Thesis}
 \newcommand{\degreename}{Master of Science}
 \newcommand{\degreefield}{Microelectronic Engineering}
 
@@ -220,7 +221,7 @@
 		
 		\vfill
 		
-		A Thesis \if@proposal Proposal\fi{} Submitted
+		A \documentname{} \if@proposal Proposal\fi{} Submitted
 		
 		In Partial Fulfillment
 		
