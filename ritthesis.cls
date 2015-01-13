@@ -395,8 +395,8 @@
 \newenvironment{listofsymbols}[3][\listofsymbname]
 	{
 		\cleardoublepage
-		\chapter*{#1}
 		\phantomsection
+		\chapter*{#1}
 		\addcontentsline{toc}{chapter}{#1}
 		\pagestyle{plain}
 		\centering
