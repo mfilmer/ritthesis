@@ -162,11 +162,13 @@
 \RequirePackage{booktabs}
 \RequirePackage[font=small,labelfont={bf,small}]{caption}
 \RequirePackage[font=small,labelfont={bf,small}]{subcaption}
-\RequirePackage[hidelinks,hyperfootnotes=false]{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Commands %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Misc. commands
+\providecommand{\phantomsection}{}		% Make work with or without hyperref
 
 % Commands for names of things
 \newcommand{\universityname}{Rochester Institute of Technology}
