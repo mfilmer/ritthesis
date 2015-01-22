@@ -55,6 +55,11 @@
 % line length
 %\renewcommand{\siglinelength}{25em}
 
+% This command makes testing the proposal option easier
+% it should not be used in a real document
+% It just redefines \chapter to be the same as \section
+\providecommand{\chapter}[1]{\section{#1}}
+
 % Begin the document, the way you always do in LaTeX
 \begin{document}
 

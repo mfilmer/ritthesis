@@ -10,36 +10,45 @@
 % Font Size
 \DeclareOption{10pt}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 \DeclareOption{11pt}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 \DeclareOption{12pt}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 
 % Paper Size
 \DeclareOption{a4paper}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 \DeclareOption{letterpaper}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 
 % Equation Alignment
 \DeclareOption{fleqn}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 \DeclareOption{leqno}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 
 % Title page options
 \DeclareOption{titlepage}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 \DeclareOption{notitlepage}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 
 % Chapter odd or any page start
@@ -53,16 +62,19 @@
 % Draft mode
 \DeclareOption{draft}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 }
 
 % One or two sided printing
 \DeclareOption{oneside}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 
 	\@twosidefalse
 }
 \DeclareOption{twoside}{
 	\PassOptionsToClass{\CurrentOption}{report}
+	\PassOptionsToClass{\CurrentOption}{article}
 
 	\@twosidetrue
 }
@@ -147,7 +159,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Load Base Class %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\LoadClass{report}
+\if@proposal
+	\LoadClass{article}
+\else
+	\LoadClass{report}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%% Packages %%%%%
@@ -213,7 +229,11 @@
 }
 \newcommand{\makesignaturepage}{
 	\phantomsection
-	\addcontentsline{toc}{chapter}{Signature Sheet}
+	\if@proposal
+		\addcontentsline{toc}{section}{Signature Sheet}
+	\else
+		\addcontentsline{toc}{chapter}{Signature Sheet}
+	\fi
 	\thispagestyle{plain}
 	\begin{doublespace}
 	\begin{center}
@@ -282,13 +302,25 @@
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 \newcommand{\makealllists}{%
 	\phantomsection
-	\addcontentsline{toc}{chapter}{Table of Contents}\tableofcontents
+	\if@proposal
+		\addcontentsline{toc}{section}{Table of Contents}\tableofcontents
+	\else
+		\addcontentsline{toc}{chapter}{Table of Contents}\tableofcontents
+	\fi
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 	\phantomsection
-	\addcontentsline{toc}{chapter}{List of Tables}\listoftables
+	\if@proposal
+		\addcontentsline{toc}{section}{List of Tables}\listoftables
+	\else
+		\addcontentsline{toc}{chapter}{List of Tables}\listoftables
+	\fi
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 	\phantomsection
-	\addcontentsline{toc}{chapter}{List of Figures}\listoffigures
+	\if@proposal
+		\addcontentsline{toc}{section}{List of Figures}\listoffigures
+	\else
+		\addcontentsline{toc}{chapter}{List of Figures}\listoffigures
+	\fi
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 }
 \newcommand{\makecommitteetable}{
@@ -302,28 +334,37 @@
 
 % Chapter headings
 \setcounter{secnumdepth}{3}
-\titleformat{\chapter}[display]
-	{\normalfont\bfseries}
-	{\LARGE{\chaptertitlename{} \thechapter}}
-	{0em}
-	{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
-	[\vspace{0.5em}]
+\if@proposal
+\else
+	\titleformat{\chapter}[display]
+		{\normalfont\bfseries}
+		{\LARGE{\chaptertitlename{} \thechapter}}
+		{0em}
+		{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
+		[\vspace{0.5em}]
+\fi
 \titleformat*{\section}{\normalfont\large\bfseries}
 \titleformat*{\subsection}{\normalfont\normalsize\bfseries}
 \titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
-\titleformat{name=\chapter,numberless}[display]
-	{\bfseries}
-	{}
-	{-8em}
-	{\raggedright\Large}
-	[\titlerule]
+\if@proposal
+\else
+	\titleformat{name=\chapter,numberless}[display]
+		{\bfseries}
+		{}
+		{-8em}
+		{\raggedright\Large}
+		[\titlerule]
+\fi
 
 % Roman numbering
 \pagenumbering{roman}
 
 % Header formatting stuff
-\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
+\if@proposal
+\else
+	\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. #1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
+\fi
 
 % Committee members
 \newcommand{\siglinelength}{25em}
@@ -345,7 +386,11 @@
 \newcommand{\makebibliography}[1]{ %
 	\cleardoublepage
 	\phantomsection
-	\addcontentsline{toc}{chapter}{Bibliography}
+	\if@proposal
+		\addcontentsline{toc}{section}{Bibliography}
+	\else
+		\addcontentsline{toc}{chapter}{Bibliography}
+	\fi
 	\bibliographystyle{IEEEtran}
 	\begin{\bibspacing}
 		\bibliography{#1}
@@ -359,7 +404,11 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\addcontentsline{toc}{chapter}{\abstractname}
+		\if@proposal
+			\addcontentsline{toc}{section}{\abstractname}
+		\else
+			\addcontentsline{toc}{chapter}{\abstractname}
+		\fi
 		\pagestyle{plain}
 		\begin{center}
 			\textbf{\large{}\abstractname}
@@ -372,7 +421,11 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\addcontentsline{toc}{chapter}{\acknowledgmentsname}
+		\if@proposal
+			\addcontentsline{toc}{section}{\acknowledgmentsname}
+		\else
+			\addcontentsline{toc}{chapter}{\acknowledgmentsname}
+		\fi
 		\pagestyle{plain}
 		\begin{center}
 			\textbf{\large{}\acknowledgmentsname}
@@ -385,7 +438,11 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\addcontentsline{toc}{chapter}{\dedicationname}
+		\if@proposal
+			\addcontentsline{toc}{section}{\dedicationname}
+		\else
+			\addcontentsline{toc}{chapter}{\dedicationname}
+		\fi
 		\pagestyle{plain}
 		\ \vfill
 	}
@@ -396,8 +453,13 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\chapter*{#1}
-		\addcontentsline{toc}{chapter}{#1}
+		\if@proposal
+			\section*{#1}
+			\addcontentsline{toc}{section}{#1}
+		\else
+			\chapter*{#1}
+			\addcontentsline{toc}{chapter}{#1}
+		\fi
 		\pagestyle{plain}
 		\centering
 		\begin{longtable}{#2}
@@ -412,19 +474,36 @@
 
 \newenvironment{theappendix}[1]
 	{
-		\titleformat{\chapter}[display]
-		{\normalfont\bfseries}
-		{\LARGE{\chaptertitlename{}}}
-		{0em}
-		{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
-		[\vspace{0.5em}]
+		% Note: This is very broken for proposals. In fact, it is probably better
+		% to just not even use this single appendix environment when writing one
+		\if@proposal
+			%\titleformat{\section}[display]
+			%{\normalfont\bfseries}
+			%{\LARGE{Appendix}}
+			%{0em}
+			%{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
+			%[\vspace{0.5em}]
+		\else
+			\titleformat{\chapter}[display]
+			{\normalfont\bfseries}
+			{\LARGE{\chaptertitlename{}}}
+			{0em}
+			{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
+			[\vspace{0.5em}]
+		\fi
 		
 		\appendix
-		\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{}: ##1}{}}
+		\if@proposal
+		\else
+			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{}: ##1}{}}
+		\fi
 		\chapter{#1}
 	}
 	{
-		\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. ##1}{}}
+		\if@proposal
+		\else
+			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. ##1}{}}
+		\fi
 	}
 
 % Done
