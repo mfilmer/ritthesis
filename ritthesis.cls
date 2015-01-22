@@ -1,4 +1,4 @@
-	\NeedsTeXFormat{LaTeX2e}
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ritthesis}[2015/01/06]
 
 %%%%% Handle Options %%%%%
