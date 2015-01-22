@@ -5,6 +5,7 @@
 % Create conditionals
 \newif\if@twoside
 \newif\if@proposal
+\newcommand{\@toplevel}{\chapter}
 
 
 % Font Size
@@ -102,6 +103,7 @@
 % Format as a proposal rather than a thesis
 \DeclareOption{proposal}{
 	\@proposaltrue
+	\renewcommand{\@toplevel}{section}
 }
 
 % Fallback
@@ -229,11 +231,7 @@
 }
 \newcommand{\makesignaturepage}{
 	\phantomsection
-	\if@proposal
-		\addcontentsline{toc}{section}{Signature Sheet}
-	\else
-		\addcontentsline{toc}{chapter}{Signature Sheet}
-	\fi
+	\addcontentsline{toc}{\@toplevel}{Signature Sheet}
 	\thispagestyle{plain}
 	\begin{doublespace}
 	\begin{center}
@@ -302,25 +300,13 @@
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 \newcommand{\makealllists}{%
 	\phantomsection
-	\if@proposal
-		\addcontentsline{toc}{section}{Table of Contents}\tableofcontents
-	\else
-		\addcontentsline{toc}{chapter}{Table of Contents}\tableofcontents
-	\fi
+	\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 	\phantomsection
-	\if@proposal
-		\addcontentsline{toc}{section}{List of Tables}\listoftables
-	\else
-		\addcontentsline{toc}{chapter}{List of Tables}\listoftables
-	\fi
+	\addcontentsline{toc}{\@toplevel}{List of Tables}\listoftables
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 	\phantomsection
-	\if@proposal
-		\addcontentsline{toc}{section}{List of Figures}\listoffigures
-	\else
-		\addcontentsline{toc}{chapter}{List of Figures}\listoffigures
-	\fi
+	\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 }
 \newcommand{\makecommitteetable}{
@@ -342,12 +328,9 @@
 		{0em}
 		{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
 		[\vspace{0.5em}]
-\fi
-\titleformat*{\section}{\normalfont\large\bfseries}
-\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
-\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
-\if@proposal
-\else
+	\titleformat*{\section}{\normalfont\large\bfseries}
+	\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
+	\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 	\titleformat{name=\chapter,numberless}[display]
 		{\bfseries}
 		{}
@@ -386,11 +369,7 @@
 \newcommand{\makebibliography}[1]{ %
 	\cleardoublepage
 	\phantomsection
-	\if@proposal
-		\addcontentsline{toc}{section}{Bibliography}
-	\else
-		\addcontentsline{toc}{chapter}{Bibliography}
-	\fi
+	\addcontentsline{toc}{\@toplevel}{Bibliography}
 	\bibliographystyle{IEEEtran}
 	\begin{\bibspacing}
 		\bibliography{#1}
@@ -404,11 +383,7 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\if@proposal
-			\addcontentsline{toc}{section}{\abstractname}
-		\else
-			\addcontentsline{toc}{chapter}{\abstractname}
-		\fi
+		\addcontentsline{toc}{\@toplevel}{\abstractname}
 		\pagestyle{plain}
 		\begin{center}
 			\textbf{\large{}\abstractname}
@@ -421,11 +396,7 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\if@proposal
-			\addcontentsline{toc}{section}{\acknowledgmentsname}
-		\else
-			\addcontentsline{toc}{chapter}{\acknowledgmentsname}
-		\fi
+		\addcontentsline{toc}{\@toplevel}{\acknowledgmentsname}
 		\pagestyle{plain}
 		\begin{center}
 			\textbf{\large{}\acknowledgmentsname}
@@ -438,11 +409,7 @@
 	{
 		\cleardoublepage
 		\phantomsection
-		\if@proposal
-			\addcontentsline{toc}{section}{\dedicationname}
-		\else
-			\addcontentsline{toc}{chapter}{\dedicationname}
-		\fi
+		\addcontentsline{toc}{\@toplevel}{\dedicationname}
 		\pagestyle{plain}
 		\ \vfill
 	}
@@ -455,11 +422,10 @@
 		\phantomsection
 		\if@proposal
 			\section*{#1}
-			\addcontentsline{toc}{section}{#1}
 		\else
 			\chapter*{#1}
-			\addcontentsline{toc}{chapter}{#1}
 		\fi
+		\addcontentsline{toc}{\@toplevel}{#1}
 		\pagestyle{plain}
 		\centering
 		\begin{longtable}{#2}
