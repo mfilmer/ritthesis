@@ -5,7 +5,7 @@
 % Create conditionals
 \newif\if@twoside
 \newif\if@proposal
-\newcommand{\@toplevel}{\chapter}
+\newcommand{\@toplevel}{chapter}
 
 
 % Font Size
