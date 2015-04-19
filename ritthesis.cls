@@ -5,8 +5,13 @@
 % Create conditionals
 \newif\if@twoside
 \newif\if@proposal
+\newif\if@microsys
 \newcommand{\@toplevel}{chapter}
 
+% Names of things dependent on class options
+\newcommand{\documentname}{Thesis}
+\newcommand{\degreename}{Master of Science}
+\newcommand{\degreefield}{Microelectronic Engineering}
 
 % Font Size
 \DeclareOption{10pt}{
@@ -106,6 +111,14 @@
 	\renewcommand{\@toplevel}{section}
 }
 
+% Use Microsystems PhD Signature Sheet Format
+\DeclareOption{microsys}{
+	\@microsystrue
+	\renewcommand\documentname{Dissertation}
+	\renewcommand\degreename{Doctorate of Philosophy}
+	\renewcommand\degreefield{Microsystems Engineering}
+}
+
 % Fallback
 \DeclareOption*{
 	\ClassWarning{ritthesis}{Unknown option '\CurrentOption'}
@@ -193,9 +206,6 @@
 \newcommand{\collegename}{Kate Gleason College of Engineering}
 \newcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
 \newcommand{\logo}{kgcoelogohoriz}
-\newcommand{\documentname}{Thesis}
-\newcommand{\degreename}{Master of Science}
-\newcommand{\degreefield}{Microelectronic Engineering}
 
 % Commands for making the frontmatter
 \newcommand{\displaytitle}{\textbf{\Large\@title}}
@@ -204,68 +214,120 @@
 	\thispagestyle{empty}
 	\hrule
 	\begin{center}
-		\
-		\vfill
-		
-		\displaytitle
-		
-		\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
-		
-		\vfill\vfill
-		
-		\includegraphics[width=15em]{\logo}
-		
-		\vfill
-		
-		\textit\departmentname
-		
-		\textit\collegename
-		
-		\textit\universityname
-		
-		\vfill
-		\
+		\if@microsys
+			\
+			\vfill
+			
+			\displaytitle
+			
+			\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
+			
+			\vfill
+			
+			A \MakeLowercase{\documentname} submitted in partial fulfillment of the requirements\\
+			for the degree of \degreename{} in \degreefield{}
+			
+			\vfill
+			
+			\degreefield{} Program
+			
+			\collegename
+			
+			\vfill
+			
+			\textit\universityname
+			
+			\textit\@date
+			
+			\vfill
+		\else
+			\
+			\vfill
+			
+			\displaytitle
+			
+			\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
+			
+			\vfill\vfill
+			
+			\includegraphics[width=15em]{\logo}
+			
+			\vfill
+			
+			\textit\departmentname
+			
+			\textit\collegename
+			
+			\textit\universityname
+			
+			\vfill
+			\
+		\fi
 	\end{center}
 	\hrule
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 }
+
 \newcommand{\makesignaturepage}{
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{Signature Sheet}
 	\thispagestyle{plain}
 	\begin{doublespace}
-	\begin{center}
-		\displaytitle
+	\if@microsys
+		\begin{center}
+			\displaytitle
+			
+			by
+			
+			\displayauthor
+		\end{center}
 		
-		\displayauthor
+		\noindent\textbf{Committee Approval:}
 		
-		\vfill
-		
-		A \documentname{} \if@proposal Proposal\fi{} Submitted
-		
-		In Partial Fulfillment
-		
-		Of the Requirements for the Degree of
-		
-		\degreename
-		
-		In
-		
-		\degreefield
+		\begin{singlespace}
+			\noindent We, the undersigned committee memmbers, certify that we have advised advised and/or supervides the candidate on the work described in this dissertation. We further certify that we have reviewed the dissertation m anuscript and approve it in partial fulfillment of th erequirementns of the degree of \degreename{} in \degreefield{}.
+		\end{singlespace}
 		
 		\vfill
 		
 		\makecommitteetable
-		
+				
 		\vfill
-		
-		\textit\universityname
-		
-		\@date
-	\end{center}
+	\else
+		\begin{center}
+			\displaytitle
+			
+			\displayauthor
+			
+			\vfill
+			
+			A \documentname{} \if@proposal Proposal\fi{} Submitted
+			
+			In Partial Fulfillment
+			
+			Of the Requirements for the Degree of
+			
+			\degreename
+			
+			In
+			
+			\degreefield
+			
+			\vfill
+			
+			\makecommitteetable
+			
+			\vfill
+			
+			\textit\universityname
+			
+			\@date
+		\end{center}
+	\fi
 	\end{doublespace}
 	{\clearpage\pagestyle{plain}\cleardoublepage}
 }
+
 \newcommand{\makecopyrightpage}{
 	\thispagestyle{plain}
 	\begin{doublespace}
@@ -311,10 +373,16 @@
 }
 \newcommand{\makecommitteetable}{
 	\begin{singlespace}
-	\begin{tabular}{rl}
-	Approved By:\\
-				\@committeetable
-	\end{tabular}
+	\if@microsys
+		\begin{tabular}{p{0.8\linewidth}r}
+			\@committeetable
+		\end{tabular}
+	\else
+		\begin{tabular}{rl}
+			Approved By:\\
+						\@committeetable
+		\end{tabular}
+	\fi
 	\end{singlespace}
 }
 
@@ -353,9 +421,18 @@
 \newcommand{\siglinelength}{25em}
 \newcommand{\@committeetable}{}
 \newcommand{\specialcommittee}[5][Dr.]{\g@addto@macro\@committeetable{
+	\if@microsys
 	\\
-	#2	& \rule{\siglinelength}{0.7pt}\\
-		& #1 #3 #4 \textit{#5}\\
+	\hline
+	\\
+	#1 #3 #4 \textit{#5}		& Date\\
+	#2\\
+	\\
+	\else
+	\\
+		#2	& \rule{\siglinelength}{0.7pt}\\
+			& #1 #3 #4 \textit{#5}\\
+	\fi
 }}
 \newcommand{\advisor}[3][Dr.]{
 	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
