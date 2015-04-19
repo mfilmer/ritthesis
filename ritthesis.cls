@@ -438,6 +438,9 @@
 	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
 	\specialcommittee[#1]{Prof.}{#2}{#3}{Advisor}
 }
+\newcommand\setadvisor[3][Dr.]{
+	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
+}
 \newcommand{\committee}[3][Dr.]{
 	\specialcommittee[#1]{Prof.}{#2}{#3}{Committee Member}
 }
