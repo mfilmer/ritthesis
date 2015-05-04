@@ -192,7 +192,6 @@
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
 \RequirePackage[font=small,labelfont={bf,small}]{caption}
-\RequirePackage[font=small,labelfont={bf,small}]{subcaption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Commands %%%%%

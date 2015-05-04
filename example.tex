@@ -1,9 +1,18 @@
 % This class inherits from the LaTeX standard report class and should support
 % all of the options supported by it, as well as a few extra. These extra
-% options are:
+% options are described here.
+% Options to adjust line spacing:
 % singlespacing, onehalfspacing, doublespacing
 % Only one should be used at a time, and the default is doublespacing
-\documentclass[microsys]{ritthesis}
+% If the microsystems title page and signature sheet should be used:
+% microsys
+% When using this option, only the \specialcommittee macro should be used, and
+% \advisor and \committee should not be used as these don't provide all the
+% required options for the microsystems signature sheet.
+% Additionally, the \setadvisor macro should be used (in addition to a
+% \specialcommittee for the advisor) to store the advisor's name for use on the
+% title page
+\documentclass{ritthesis}
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%% Packages %%%%%
@@ -15,6 +24,12 @@
 % You can set the graphicspath if you want to use pictures no in the same
 % directory as the .tex file
 %\graphicspath{{images/}}
+
+% If subfigures or subtables are desires, the subcaption package is the
+% recommended way to go. This package should not be used unless subfigures or
+% subtables (or any other functionality it provides) is desired. It will not
+% work if the subfig package is used.
+\usepackage{subcaption}
 
 % Use these commands to set up the author, title, and date
 \author{Matthew J. Filmer}
@@ -189,6 +204,27 @@ The first paragraph in a chapter\footnote{and probably section} is not indented.
 \includegraphics{kgcoelogohoriz}
 \caption{Trust me, this is a figure}
 \label{fig:samp}
+\end{figure}
+
+% A subfigure can be created using the environments provided in the subcaption
+% package
+\begin{figure}
+\centering
+\begin{subfigure}{0.4\linewidth}
+\centering
+\includegraphics[width=\linewidth]{kgcoelogohoriz}
+\caption{Left subfigure}
+\label{fig:sub:left}
+\end{subfigure}
+\quad
+\begin{subfigure}{0.4\linewidth}
+\centering
+\includegraphics[width=\linewidth]{kgcoelogohoriz}
+\caption{Right subfigure}
+\label{fig:sub:right}
+\end{subfigure}
+\caption{This is the caption for the entire figure}
+\label{fig:sub}
 \end{figure}
 
 some more\footnote{aoeu} text
