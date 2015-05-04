@@ -192,6 +192,10 @@
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
 \RequirePackage[font=small,labelfont={bf,small}]{caption}
+% If using the subcaption (preferred) package for subfigures, the caption
+% formatting is used
+% If using the subfig package instead, the settings must be coppied over.
+\PassOptionsToPackage{font=small,labelfont={bf,small}}{subfig}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Commands %%%%%

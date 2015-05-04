@@ -31,6 +31,12 @@
 % work if the subfig package is used.
 \usepackage{subcaption}
 
+% This command is used to set a consistent head height. If there are Fancyhdr
+% warnings that it is too small, increase it. This should not happen unless
+% headers of more than two lines are used. If only single line headers are used,
+% this line can likely be removed
+\setlength{\headheight}{23pt}
+
 % Use these commands to set up the author, title, and date
 \author{Matthew J. Filmer}
 % You most likely need to insert a line break or two to make the title wrap
@@ -210,16 +216,16 @@ The first paragraph in a chapter\footnote{and probably section} is not indented.
 % package
 \begin{figure}
 \centering
-\begin{subfigure}{0.4\linewidth}
+\begin{subfigure}{0.25\linewidth}
 \centering
-\includegraphics[width=\linewidth]{kgcoelogohoriz}
+\includegraphics[width=\linewidth]{kgcoelogovert}
 \caption{Left subfigure}
 \label{fig:sub:left}
 \end{subfigure}
-\quad
-\begin{subfigure}{0.4\linewidth}
+\quad\quad\quad\quad
+\begin{subfigure}{0.25\linewidth}
 \centering
-\includegraphics[width=\linewidth]{kgcoelogohoriz}
+\includegraphics[width=\linewidth]{kgcoelogovert}
 \caption{Right subfigure}
 \label{fig:sub:right}
 \end{subfigure}
