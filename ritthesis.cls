@@ -523,7 +523,6 @@
 
 
 % Setting the chapter title formatting different for appenndices
-\AtEndOfClass{
 \let\@original@appendix\appendix
 \renewcommand\appendix{\@setappendixtitleformat\@original@appendix}
 \newcommand\@setappendixtitleformat{
@@ -542,7 +541,6 @@
 		{-8em}
 		{\raggedright\Large}
 		[\titlerule]
-}
 }
 
 
