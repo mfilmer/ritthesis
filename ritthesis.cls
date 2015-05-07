@@ -394,8 +394,8 @@
 \if@proposal
 \else
 	\titleformat{\chapter}[display]
-		{\normalfont\bfseries}
-		{\LARGE{\chaptertitlename{} \thechapter}}
+		{\normalfont\LARGE\bfseries}
+		{\chaptertitlename{} \thechapter}
 		{0em}
 		{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
 		[\vspace{0.5em}]
@@ -521,6 +521,31 @@
 	}
 	{\end{longtable}\cleardoublepage}
 
+
+% Setting the chapter title formatting different for appenndices
+\AtEndOfClass{
+\let\@original@appendix\appendix
+\renewcommand\appendix{\@setappendixtitleformat\@original@appendix}
+\newcommand\@setappendixtitleformat{
+	\titleformat{\chapter}[hang]
+		{\vspace{-15ex}\normalfont\Large\bfseries}
+		{\chaptertitlename{} \thechapter:}
+		{1em}
+		{\Large}
+		[\vspace{0ex}]
+	\titleformat*{\section}{\normalfont\large\bfseries}
+	\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
+	\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
+	\titleformat{name=\chapter,numberless}[display]
+		{\bfseries}
+		{}
+		{-8em}
+		{\raggedright\Large}
+		[\titlerule]
+}
+}
+
+
 \newenvironment{theappendix}[1]
 	{
 		% Note: This is very broken for proposals. In fact, it is probably better
@@ -533,15 +558,15 @@
 			%{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
 			%[\vspace{0.5em}]
 		\else
-			\titleformat{\chapter}[display]
-			{\normalfont\bfseries}
-			{\LARGE{\chaptertitlename{}}}
-			{0em}
-			{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
-			[\vspace{0.5em}]
+			\titleformat{\chapter}[hang]
+				{\vspace{-15ex}\normalfont\Large\bfseries}
+				{\chaptertitlename{} \thechapter:}
+				{1em}
+				{\Large}
+				[\vspace{0ex}]
 		\fi
 		
-		\appendix
+		\@original@appendix
 		\if@proposal
 		\else
 			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{}: ##1}{}}
