@@ -6,6 +6,7 @@
 \newif\if@twoside
 \newif\if@proposal
 \newif\if@microsys
+\newif\if@nohead
 \newcommand{\@toplevel}{chapter}
 
 % Names of things dependent on class options
@@ -105,9 +106,18 @@
 	\renewcommand{\bibspacing}{doublespace}
 }
 
+% Disable page marks. This happens automatically when the 'proposal' option is
+% used. This also moves the page numbers to the center of the bottom of each
+% page. This might be changed in the future but it will be a bit of work.
+\DeclareOption{nohead}{
+	\@noheadtrue
+}
+
+
 % Format as a proposal rather than a thesis
 \DeclareOption{proposal}{
 	\@proposaltrue
+	\@noheadtrue
 	\renewcommand{\@toplevel}{section}
 }
 
@@ -132,41 +142,50 @@
 
 %%%%% Set up environment based on options %%%%%
 \AtEndOfClass{\fancyhf{}}
-\if@proposal
-	\PassOptionsToPackage{left=1in, right=1in, top=1in, bottom=1in}{geometry}
+\if@nohead
 	\AtEndOfClass{
 		\fancyfoot[C]{\thepage}
 		\renewcommand{\headrulewidth}{0pt}
 	}
 \else
+\fi
+\if@proposal
+	\PassOptionsToPackage{left=1in, right=1in, top=1in, bottom=1in}{geometry}
+\else
 	% One or two sided prining (matters for binding purposes)
 	\if@twoside
 		\PassOptionsToPackage{inner=1.5in, outer=1in, top=1in, bottom=1in}{geometry}
-		\AtEndOfClass{
-			\fancyfoot[LE,RO]{\thepage}
-			\fancyhead[RO]{\footnotesize\textbf\rightmark}
-			\fancyhead[LE]{\footnotesize\textbf\leftmark}
-			\renewcommand{\headrulewidth}{0.7pt}
-			\fancypagestyle{plain}{%
-				\fancyhf{}
+		\if@nohead
+		\else
+			\AtEndOfClass{
 				\fancyfoot[LE,RO]{\thepage}
-				\renewcommand{\headrulewidth}{0pt}
-				\renewcommand{\footrulewidth}{0pt}
+				\fancyhead[RO]{\footnotesize\textbf\rightmark}
+				\fancyhead[LE]{\footnotesize\textbf\leftmark}
+				\renewcommand{\headrulewidth}{0.7pt}
+				\fancypagestyle{plain}{%
+					\fancyhf{}
+					\fancyfoot[LE,RO]{\thepage}
+					\renewcommand{\headrulewidth}{0pt}
+					\renewcommand{\footrulewidth}{0pt}
+				}
 			}
-		}
+		\fi
 	\else
 		\PassOptionsToPackage{left=1.5in, right=1in, top=1in, bottom=1in}{geometry}
-		\AtEndOfClass{
-			\fancyfoot[R]{\thepage}
-			\fancyhead[L]{\footnotesize\textbf\leftmark}
-			\renewcommand{\headrulewidth}{0.7pt}
-			\fancypagestyle{plain}{%
-				\fancyhf{}
+		\if@nohead
+		\else
+			\AtEndOfClass{
 				\fancyfoot[R]{\thepage}
-				\renewcommand{\headrulewidth}{0pt}
-				\renewcommand{\footrulewidth}{0pt}
+				\fancyhead[L]{\footnotesize\textbf\leftmark}
+				\renewcommand{\headrulewidth}{0.7pt}
+				\fancypagestyle{plain}{%
+					\fancyhf{}
+					\fancyfoot[R]{\thepage}
+					\renewcommand{\headrulewidth}{0pt}
+					\renewcommand{\footrulewidth}{0pt}
+				}
 			}
-		}
+		\fi
 	\fi
 \fi
 \AtEndOfClass{\pagestyle{fancy}}
@@ -414,7 +433,7 @@
 \pagenumbering{roman}
 
 % Header formatting stuff
-\if@proposal
+\if@nohead
 \else
 	\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. #1}{}}
 	\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
@@ -565,14 +584,14 @@
 		\fi
 		
 		\@original@appendix
-		\if@proposal
+		\if@nohead
 		\else
 			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{}: ##1}{}}
 		\fi
 		\chapter{#1}
 	}
 	{
-		\if@proposal
+		\if@nohead
 		\else
 			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. ##1}{}}
 		\fi
