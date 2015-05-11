@@ -287,7 +287,7 @@
 		\fi
 	\end{center}
 	\hrule
-	{\clearpage\pagestyle{plain}\cleardoublepage}
+	\cleardoublepage
 }
 
 \newcommand{\makesignaturepage}{
@@ -347,7 +347,7 @@
 		\end{center}
 	\fi
 	\end{doublespace}
-	{\clearpage\pagestyle{plain}\cleardoublepage}
+	\cleardoublepage
 }
 
 \newcommand{\makecopyrightpage}{
@@ -374,7 +374,7 @@
 	\@author\hfill{}Date
 	\end{singlespace}
 	\end{doublespace}
-	{\clearpage\pagestyle{plain}\cleardoublepage}
+	\cleardoublepage
 }
 \if@proposal
 	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage}
@@ -383,15 +383,16 @@
 \fi
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 \newcommand{\makealllists}{%
+	\cleardoublepage
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
-	{\clearpage\pagestyle{plain}\cleardoublepage}
+	\cleardoublepage
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{List of Tables}\listoftables
-	{\clearpage\pagestyle{plain}\cleardoublepage}
+	\cleardoublepage
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
-	{\clearpage\pagestyle{plain}\cleardoublepage}
+	\cleardoublepage
 }
 \newcommand{\makecommitteetable}{
 	\begin{singlespace}
