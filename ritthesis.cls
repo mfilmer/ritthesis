@@ -306,7 +306,7 @@
 		\noindent\textbf{Committee Approval:}
 		
 		\begin{singlespace}
-			\noindent We, the undersigned committee memmbers, certify that we have advised advised and/or supervides the candidate on the work described in this dissertation. We further certify that we have reviewed the dissertation manuscript and approve it in partial fulfillment of th erequirementns of the degree of \degreename{} in \degreefield{}.
+			\noindent We, the undersigned committee memmbers, certify that we have advised advised and/or supervides the candidate on the work described in this dissertation. We further certify that we have reviewed the dissertation manuscript and approve it in partial fulfillment of the requirementns of the degree of \degreename{} in \degreefield{}.
 		\end{singlespace}
 		
 		\vfill
