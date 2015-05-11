@@ -188,7 +188,6 @@
 		\fi
 	\fi
 \fi
-\AtEndOfClass{\pagestyle{fancy}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Load Base Class %%%%%
