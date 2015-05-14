@@ -340,6 +340,10 @@
 			
 			\vfill
 			
+			\textit\departmentname
+			
+			\textit\collegename
+			
 			\textit\universityname
 			
 			\@date
