@@ -355,28 +355,26 @@
 
 \newcommand{\makecopyrightpage}{
 	\thispagestyle{plain}
-	\begin{doublespace}
 	\begin{center}
 		\displaytitle
 		
 		\displayauthor
 	\end{center}
-	\vspace{3em}
+	\vspace{5ex}
 	\begin{singlespace}
-	\noindent
-	I, \@author{}, hereby grant permission to the Wallace Memorial Library
-	of the Rochester Institute of Technology to reproduce this document in
-	whole or in part, such that any reproduction will not be for commercial
-	use or profit.
-	
-	\vspace{5em}
-	\noindent
-	\rule{15em}{0.7pt}\hfill\rule{10em}{0.7pt}
-	
-	\noindent
-	\@author\hfill{}Date
+		\noindent
+		I, \@author{}, hereby grant permission to the Wallace Memorial Library
+		of the Rochester Institute of Technology to reproduce this document in
+		whole or in part, such that any reproduction will not be for commercial
+		use or profit.
+		
+		\vspace{10ex}
+		\noindent
+		\rule{15em}{0.7pt}\hfill\rule{10em}{0.7pt}
+		
+		\noindent
+		\@author\hfill{}Date
 	\end{singlespace}
-	\end{doublespace}
 	\cleardoublepage
 }
 \if@proposal
