@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ritthesis}[2015/01/06]
+\ProvidesClass{ritthesis}[2015/06/15]
 
 %%%%% Handle Options %%%%%
 % Create conditionals
@@ -95,6 +95,13 @@
 }
 \DeclareOption{doublespacing}{
 	\AtEndOfClass{\doublespacing}
+}
+
+\DeclareOption{doublespacelists}{
+	\AtEndOfClass{
+		\renewcommand\tocspacing{doublespace}
+		\renewcommand\losspacing{doublespace}
+	}
 }
 
 \newcommand{\bibspacing}{singlespace}
@@ -239,6 +246,10 @@
 			\
 			\vfill
 			
+			\includegraphics[width=0.25\linewidth]{kgcoelogovert}
+			
+			\vfill
+			
 			\displaytitle
 			
 			\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
@@ -306,12 +317,13 @@
 		\noindent\textbf{Committee Approval:}
 		
 		\begin{singlespace}
+			\small
 			\noindent We, the undersigned committee members, certify that we have advised and/or supervised the candidate on the work described in this dissertation. We further certify that we have reviewed the dissertation manuscript and approve it in partial fulfillment of the requirements of the degree of \degreename{} in \degreefield{}.
 		\end{singlespace}
 		
 		\vfill
 		
-		\makecommitteetable
+		\makemicrosyscommitteetable
 				
 		\vfill
 	\else
@@ -400,16 +412,22 @@
 }
 \newcommand{\makecommitteetable}{
 	\begin{singlespace}
-	\if@microsys
-		\begin{tabular}{p{0.8\linewidth}r}
-			\@committeetable
-		\end{tabular}
-	\else
 		\begin{tabular}{rl}
 			Approved By:\\
 						\@committeetable
 		\end{tabular}
-	\fi
+	\end{singlespace}
+}
+
+\newcommand{\makemicrosyscommitteetable}{
+	\begin{singlespace}
+		\centering
+		\small
+		\begin{tabular}{p{0.84\linewidth}p{0.11\linewidth}}
+			\@committeetable
+			{\normalsize\textbf{Certified By:}}\\
+			\@certifiedbytable
+		\end{tabular}
 	\end{singlespace}
 }
 
@@ -451,7 +469,6 @@
 	\if@microsys
 	\\
 	\hline
-	\\
 	#1 #3 #4 \textit{#5}		& Date\\
 	#2\\
 	\\
@@ -460,6 +477,14 @@
 		#2	& \rule{\siglinelength}{0.7pt}\\
 			& #1 #3 #4 \textit{#5}\\
 	\fi
+}}
+\newcommand{\@certifiedbytable}{}
+\newcommand{\certifiedby}[5][Dr.]{\g@addto@macro\@certifiedbytable{
+	\\
+	\hline
+	#1 #3 #4 \textit{#5}		& Date\\
+	#2\\
+	\\
 }}
 \newcommand{\advisor}[3][Dr.]{
 	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
