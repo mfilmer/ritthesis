@@ -385,15 +385,17 @@
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 \newcommand{\makealllists}{%
 	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{\@toplevel}{List of Tables}\listoftables
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
-	\cleardoublepage
+	\begin{singlespace}
+		\phantomsection
+		\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{\@toplevel}{List of Tables}\listoftables
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
+		\cleardoublepage
+	\end{singlespace}
 }
 \newcommand{\makecommitteetable}{
 	\begin{singlespace}
