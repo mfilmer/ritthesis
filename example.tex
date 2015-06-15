@@ -4,11 +4,17 @@
 % Options to adjust line spacing:
 % singlespacing, onehalfspacing, doublespacing
 % Only one should be used at a time, and the default is doublespacing
+% By default the three main lists (toc, lof, lot) are single spaced and the list
+% of symbols is 1.5 line spacing. To return these four lists to double spacing
+% use the option:
+% doublespacelists
 % If the microsystems title page and signature sheet should be used:
 % microsys
-% When using this option, only the \specialcommittee macro should be used, and
-% \advisor and \committee should not be used as these don't provide all the
-% required options for the microsystems signature sheet.
+% When using this option, only the \specialcommittee, and \certifiedby macros
+% should be used. \certifiedby has the same syntax as \specialcommittee and 
+% should include the list of names to appear under "Certified By" on the 
+% signature sheet. \advisor and \committee should not be used as these don't 
+% provide all the required options for the microsystems signature sheet.
 % Additionally, the \setadvisor macro should be used (in addition to a
 % \specialcommittee for the advisor) to store the advisor's name for use on the
 % title page
