@@ -383,9 +383,10 @@
 	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\makecopyrightpage}
 \fi
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
+\newcommand\tocspacing{singlespace}
 \newcommand{\makealllists}{%
 	\cleardoublepage
-	\begin{singlespace}
+	\begin{\tocspacing}
 		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
 		\cleardoublepage
@@ -395,7 +396,7 @@
 		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
 		\cleardoublepage
-	\end{singlespace}
+	\end{\tocspacing}
 }
 \newcommand{\makecommitteetable}{
 	\begin{singlespace}
@@ -522,6 +523,7 @@
 	{\vfill\cleardoublepage}
 
 \newcommand{\listofsymbname}{List of Symbols}
+\newcommand\losspacing{onehalfspace}
 \newenvironment{listofsymbols}[3][\listofsymbname]
 	{
 		\cleardoublepage
@@ -534,6 +536,7 @@
 		\addcontentsline{toc}{\@toplevel}{#1}
 		\pagestyle{plain}
 		\centering
+		\begin{\losspacing}
 		\begin{longtable}{#2}
 			\toprule
 			#3\\
@@ -542,7 +545,7 @@
 			\bottomrule
 			\endfoot
 	}
-	{\end{longtable}\cleardoublepage}
+	{\end{longtable}\end{\losspacing}\cleardoublepage}
 
 
 % Setting the chapter title formatting different for appenndices
