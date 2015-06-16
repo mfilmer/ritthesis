@@ -164,34 +164,63 @@
 		\PassOptionsToPackage{inner=1.5in, outer=1in, top=1in, bottom=1in}{geometry}
 		\if@nohead
 		\else
-			\AtEndOfClass{
-				\fancyfoot[LE,RO]{\thepage}
-				\fancyhead[RO]{\footnotesize\textbf\rightmark}
-				\fancyhead[LE]{\footnotesize\textbf\leftmark}
-				\renewcommand{\headrulewidth}{0.7pt}
-				\fancypagestyle{plain}{%
-					\fancyhf{}
-					\fancyfoot[LE,RO]{\thepage}
-					\renewcommand{\headrulewidth}{0pt}
-					\renewcommand{\footrulewidth}{0pt}
+			\if@microsys
+				\AtEndOfClass{
+					\fancyfoot[C]{\thepage}
+					\fancyhead[RO]{\footnotesize\textbf\rightmark}
+					\fancyhead[LE]{\footnotesize\textbf\leftmark}
+					\renewcommand{\headrulewidth}{0.7pt}
+					\fancypagestyle{plain}{%
+						\fancyhf{}
+						\fancyfoot[LE,RO]{\thepage}
+						\renewcommand{\headrulewidth}{0pt}
+						\renewcommand{\footrulewidth}{0pt}
+					}
 				}
-			}
+			\else
+				\AtEndOfClass{
+					\fancyfoot[LE,RO]{\thepage}
+					\fancyhead[RO]{\footnotesize\textbf\rightmark}
+					\fancyhead[LE]{\footnotesize\textbf\leftmark}
+					\renewcommand{\headrulewidth}{0.7pt}
+					\fancypagestyle{plain}{%
+						\fancyhf{}
+						\fancyfoot[LE,RO]{\thepage}
+						\renewcommand{\headrulewidth}{0pt}
+						\renewcommand{\footrulewidth}{0pt}
+					}
+				}
+			\fi
 		\fi
 	\else
 		\PassOptionsToPackage{left=1.5in, right=1in, top=1in, bottom=1in}{geometry}
 		\if@nohead
 		\else
-			\AtEndOfClass{
-				\fancyfoot[R]{\thepage}
-				\fancyhead[L]{\footnotesize\textbf\leftmark}
-				\renewcommand{\headrulewidth}{0.7pt}
-				\fancypagestyle{plain}{%
-					\fancyhf{}
-					\fancyfoot[R]{\thepage}
-					\renewcommand{\headrulewidth}{0pt}
-					\renewcommand{\footrulewidth}{0pt}
+			\if@microsys
+				\AtEndOfClass{
+					\fancyfoot[C]{\thepage}
+					\fancyhead[L]{\footnotesize\textbf\leftmark}
+					\renewcommand{\headrulewidth}{0.7pt}
+					\fancypagestyle{plain}{%
+						\fancyhf{}
+						\fancyfoot[R]{\thepage}
+						\renewcommand{\headrulewidth}{0pt}
+						\renewcommand{\footrulewidth}{0pt}
+					}
 				}
-			}
+			\else
+				\AtEndOfClass{
+					\fancyfoot[R]{\thepage}
+					\fancyhead[L]{\footnotesize\textbf\leftmark}
+					\renewcommand{\headrulewidth}{0.7pt}
+					\fancypagestyle{plain}{%
+						\fancyhf{}
+						\fancyfoot[R]{\thepage}
+						\renewcommand{\headrulewidth}{0pt}
+						\renewcommand{\footrulewidth}{0pt}
+					}
+				}
+			\fi
 		\fi
 	\fi
 \fi
