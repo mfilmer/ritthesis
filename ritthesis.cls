@@ -451,24 +451,22 @@
 	\end{\tocspacing}
 }
 \newcommand{\makecommitteetable}{
-	\begin{singlespace}
-		\begin{tabular}{rl}
-			Approved By:\\
-						\@committeetable
-		\end{tabular}
-	\end{singlespace}
+	\noindent\begin{minipage}{\@siglinelength}
+		\singlespacing
+		Committee Approval:\vskip\@approvedbyskip
+		\@committeetable
+	\end{minipage}
 }
 
 \newcommand{\makemicrosyscommitteetable}{
-	\begin{singlespace}
-		\centering
+	\noindent\begin{minipage}{\@siglinelength}
 		\small
-		\begin{tabular}{p{0.84\linewidth}p{0.11\linewidth}}
-			\@committeetable
-			{\normalsize\textbf{Certified By:}}\\
-			\@certifiedbytable
-		\end{tabular}
-	\end{singlespace}
+		\singlespacing
+		{\normalsize\bfseries Committee Approval:}\vskip\@committeetablelabelskip
+		\@committeetable\removelastskip\vskip\@committeetableskip
+		{\normalsize\bfseries Certified By:}\vskip\@committeetablelabelskip
+		\@certifiedbytable
+	\end{minipage}
 }
 
 % Chapter headings
@@ -503,35 +501,46 @@
 \fi
 
 % Committee members
-\newcommand{\siglinelength}{25em}
-\newcommand{\@committeetable}{}
-\newcommand{\specialcommittee}[5][Dr.]{\g@addto@macro\@committeetable{
-	\if@microsys
-	\\
-	\hline
-	#1 #3 #4 \textit{#5}		& Date\\
-	#2\\
-	\\
-	\else
-	\\
-		#2	& \rule{\siglinelength}{0.7pt}\\
-			& #1 #3 #4 \textit{#5}\\
-	\fi
+\newcommand*\@siglinelength\linewidth
+\newlength\@siglineheight
+\setlength\@siglineheight{1pt}
+\newlength\@committeeskip
+\setlength\@committeeskip{5ex}
+\newlength\@committeetablelabelskip
+\setlength\@committeetablelabelskip{5ex}
+\newlength\@committeetableskip
+\setlength\@committeetableskip{7ex}
+
+% Syntax of \addcommittee is:
+% \addcommittee[Title (Dr.)]{Position (Prof)}{First MI.}{Last}{Role (Advisor)}
+% #1 -> Title
+% #2 -> Position
+% #3 -> First MI
+% #4 -> Last
+% #5 -> Position
+\newcommand*{\@committeetable}{}
+\newcommand*\addcommittee[5][Dr.]{\g@addto@macro\@committeetable{%
+	\rule{\linewidth}{\@siglineheight}\\
+	#1\ #3 #4 \textit{#5}\hfill Date\\
+	#2\vskip\@committeeskip\relax
 }}
-\newcommand{\@certifiedbytable}{}
-\newcommand{\certifiedby}[5][Dr.]{\g@addto@macro\@certifiedbytable{
-	\\
-	\hline
-	#1 #3 #4 \textit{#5}		& Date\\
-	#2\\
-	\\
+
+% For backwards compatibility
+\let\specialcommittee\addcommittee
+
+\newcommand*{\@certifiedbytable}{}
+\newcommand*{\certifiedby}[5][Dr.]{\g@addto@macro\@certifiedbytable{%
+	\rule{\linewidth}{\@siglineheight}\\
+	#1\ #3 #4 \textit{#5}\hfill Date\\
+	#2\vskip\@committeeskip\relax
 }}
+
 \newcommand{\advisor}[3][Dr.]{
 	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
 	\specialcommittee[#1]{Prof.}{#2}{#3}{Advisor}
 }
 \newcommand\setadvisor[3][Dr.]{
-	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
+	\providecommand{\@advisor}{#1\ \textsc{#2 #3}}
 }
 \newcommand{\committee}[3][Dr.]{
 	\specialcommittee[#1]{Prof.}{#2}{#3}{Committee Member}
