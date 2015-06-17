@@ -451,18 +451,21 @@
 	\end{\tocspacing}
 }
 \newcommand{\makecommitteetable}{
-	\noindent\begin{minipage}{\@siglinelength}
+	\noindent
+	\begin{minipage}{\@siglinelength}
+		\small
 		\singlespacing
-		Committee Approval:\vskip\@approvedbyskip
+		{\normalsize\bfseries Committee Approval:}\vskip\@committeetableskip
 		\@committeetable
 	\end{minipage}
 }
 
 \newcommand{\makemicrosyscommitteetable}{
-	\noindent\begin{minipage}{\@siglinelength}
+	\noindent
+	\begin{minipage}{\@siglinelength}
 		\small
 		\singlespacing
-		{\normalsize\bfseries Committee Approval:}\vskip\@committeetablelabelskip
+		\removelastskip
 		\@committeetable\removelastskip\vskip\@committeetableskip
 		{\normalsize\bfseries Certified By:}\vskip\@committeetablelabelskip
 		\@certifiedbytable
@@ -535,15 +538,18 @@
 	#2\vskip\@committeeskip\relax
 }}
 
-\newcommand{\advisor}[3][Dr.]{
-	\providecommand{\@advisor}{#1 \textsc{#2 #3}}
-	\specialcommittee[#1]{Prof.}{#2}{#3}{Advisor}
+% Syntax for \advisor and \committee tables
+% \advisor[Position]{First}{Last}
+% \committee[Position]{First}{Last}
+\newcommand*{\advisor}[3]{
+	\providecommand{\@advisor}{Dr.\ \textsc{#2 #3}}
+	\addcommittee{#1}{#2}{#3}{Advisor}
 }
-\newcommand\setadvisor[3][Dr.]{
+\newcommand*{\committee}[3]{
+	\addcommittee{#1}{#2}{#3}{}
+}
+\newcommand*\setadvisor[3][Dr.]{
 	\providecommand{\@advisor}{#1\ \textsc{#2 #3}}
-}
-\newcommand{\committee}[3][Dr.]{
-	\specialcommittee[#1]{Prof.}{#2}{#3}{Committee Member}
 }
 
 % Bibliography

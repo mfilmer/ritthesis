@@ -18,7 +18,7 @@
 % Additionally, the \setadvisor macro should be used (in addition to a
 % \specialcommittee for the advisor) to store the advisor's name for use on the
 % title page
-\documentclass[microsys]{ritthesis}
+\documentclass[]{ritthesis}
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%% Packages %%%%%
@@ -71,12 +71,16 @@
 % Each of these commands can be repeated as many times as necessary
 % Used to create the lines on the signature sheet. There is an optional first
 % argument for each of these to specify title (the default is Dr.)
-\advisor{Joe}{Smith}
-\committee{Philip}{Jones}
+\advisor{Assistant Professor}{Joe}{Smith}
+\committee{Dean of the Department}{Philip}{Jones}
 % Note, the following line makes the signature area overflow and should
 % generally be shortened. This is probably an extreme case anyway.
 \addcommittee[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
+
+% The following are listed under "Certified By:" on the microsys sig sheet
 \certifiedby[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
+\certifiedby[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
+
 
 % You can customize the length of the signature line by uncommenting and
 % changing the following line. The default is 25em, and is close to the maximum
