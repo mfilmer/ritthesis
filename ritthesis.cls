@@ -271,6 +271,7 @@
 \providecommand{\phantomsection}{}		% Make work with or without hyperref
 
 % Commands for names of things
+\newcommand{\cityname}{Rochester, New York}
 \newcommand{\universityname}{Rochester Institute of Technology}
 \newcommand{\collegename}{Kate Gleason College of Engineering}
 \newcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
@@ -309,6 +310,8 @@
 			\vfill
 			
 			\textit\universityname
+			
+			\textit\cityname
 			
 			\textit\@date
 			
