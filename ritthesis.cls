@@ -7,6 +7,7 @@
 \newif\if@proposal
 \newif\if@microsys
 \newif\if@nohead
+\newif\if@copyrightpage
 \newcommand{\@toplevel}{chapter}
 
 % Names of things dependent on class options
@@ -102,6 +103,14 @@
 		\renewcommand\tocspacing{doublespace}
 		\renewcommand\losspacing{doublespace}
 	}
+}
+
+% Include copyright page
+\DeclareOption{copyrightpage}{
+	\@copyrightpagetrue
+}
+\DeclareOption{nocopyrightpage}{
+	\@copyrightpagefalse
 }
 
 \newcommand{\bibspacing}{singlespace}
@@ -268,10 +277,10 @@
 \newcommand{\displaytitle}{\textbf{\Large\@title}}
 \newcommand{\displayauthor}{\textsc{\@author}}
 \newcommand{\maketitlepage}{
-	\thispagestyle{empty}
-	\hrule
 	\begin{center}
 		\if@microsys
+			\thispagestyle{empty}
+			\hrule
 			\
 			\vfill
 			
@@ -301,31 +310,44 @@
 			\textit\@date
 			
 			\vfill
+			\hrule
 		\else
-			\
-			\vfill
-			
+			\thispagestyle{empty}
+			\hrule
+			\vfill\vfill
 			\displaytitle
 			
-			\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
+			\vfill
+			
+			\displayauthor
 			
 			\vfill\vfill
+			\hrule
+			\cleardoublepage\thispagestyle{empty}
+			\displaytitle
+			
+			\displayauthor\\
+			
+			\@date
+			
+			\vfill
+			
+			A Thesis Submitted\\
+			in Partial Fulfillment\\
+			of the Requirements for the Degree of\\
+			\degreename\\
+			in\\
+			\degreefield
+			
+			\vfill
 			
 			\includegraphics[width=15em]{\logo}
 			
 			\vfill
 			
 			\textit\departmentname
-			
-			\textit\collegename
-			
-			\textit\universityname
-			
-			\vfill
-			\
 		\fi
 	\end{center}
-	\hrule
 	\cleardoublepage
 }
 
@@ -421,7 +443,7 @@
 \if@proposal
 	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage}
 \else
-	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\makecopyrightpage}
+	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\if@copyrightpage\makecopyrightpage\fi}
 \fi
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 \newcommand\tocspacing{singlespace}
