@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ritthesis}[2015/06/15]
 
+% Requirements for title and signature sheets takes from:
+% http://infoguides.rit.edu/thesis-services
+
 %%%%% Handle Options %%%%%
 % Create conditionals
 \newif\if@twoside
@@ -277,10 +280,10 @@
 \newcommand{\displaytitle}{\textbf{\Large\@title}}
 \newcommand{\displayauthor}{\textsc{\@author}}
 \newcommand{\maketitlepage}{
-	\begin{center}
-		\if@microsys
+	\if@microsys
+		\begin{center}
 			\thispagestyle{empty}
-			\hrule
+			\ \vspace{-\headheight}\hrule
 			\
 			\vfill
 			
@@ -311,9 +314,12 @@
 			
 			\vfill
 			\hrule
-		\else
+			\cleardoublepage
+		\end{center}
+	\else
+		\begin{center}
 			\thispagestyle{empty}
-			\hrule
+			\ \vspace{-\headheight}\hrule
 			\vfill\vfill
 			\displaytitle
 			
@@ -324,6 +330,8 @@
 			\vfill\vfill
 			\hrule
 			\cleardoublepage\thispagestyle{empty}
+			\ \vspace{-\headheight}\hrule
+			\vfill
 			\displaytitle
 			
 			\displayauthor\\
@@ -346,9 +354,12 @@
 			\vfill
 			
 			\textit\departmentname
-		\fi
-	\end{center}
-	\cleardoublepage
+			
+			\vspace{1ex}
+			\hrule
+			\cleardoublepage
+		\end{center}
+	\fi
 }
 
 \newcommand{\makesignaturepage}{
@@ -385,31 +396,9 @@
 			
 			\vfill
 			
-			A \documentname{} \if@proposal Proposal\fi{} Submitted
-			
-			In Partial Fulfillment
-			
-			Of the Requirements for the Degree of
-			
-			\degreename
-			
-			In
-			
-			\degreefield
-			
-			\vfill
-			
 			\makecommitteetable
 			
 			\vfill
-			
-			\textit\departmentname
-			
-			\textit\collegename
-			
-			\textit\universityname
-			
-			\@date
 		\end{center}
 	\fi
 	\end{doublespace}
