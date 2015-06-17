@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ritthesis}[2015/06/15]
+\ProvidesClass{ritthesis}[2015/06/17]
 
 % Requirements for title and signature sheets takes from:
 % http://infoguides.rit.edu/thesis-services
