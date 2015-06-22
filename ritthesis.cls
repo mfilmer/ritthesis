@@ -638,18 +638,18 @@
 \renewcommand\appendix{\@setappendixtitleformat\@original@appendix}
 \newcommand\@setappendixtitleformat{
 	\titleformat{\chapter}[hang]
-		{\vspace{-15ex}\normalfont\Large\bfseries}
+		{\vspace{-18ex}\normalfont\Large\bfseries}
 		{\chaptertitlename{} \thechapter:}
 		{1em}
 		{\Large}
-		[\vspace{0ex}]
+		[\vspace{-5ex}]
 	\titleformat*{\section}{\normalfont\large\bfseries}
 	\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
 	\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 	\titleformat{name=\chapter,numberless}[display]
 		{\bfseries}
 		{}
-		{-8em}
+		{-5ex}
 		{\raggedright\Large}
 		[\titlerule]
 }
@@ -668,11 +668,11 @@
 			%[\vspace{0.5em}]
 		\else
 			\titleformat{\chapter}[hang]
-				{\vspace{-15ex}\normalfont\Large\bfseries}
+				{\vspace{-18ex}\normalfont\Large\bfseries}
 				{\chaptertitlename{} \thechapter:}
 				{1em}
 				{\Large}
-				[\vspace{0ex}]
+				[\vspace{-5ex}]
 		\fi
 		
 		\@original@appendix
