@@ -284,6 +284,7 @@
 	\if@microsys
 		\begin{center}
 			\thispagestyle{empty}
+			\setcounter{page}{0}
 			\ \vspace{-\headheight}\hrule
 			\
 			\vfill
@@ -322,6 +323,7 @@
 	\else
 		\begin{center}
 			\thispagestyle{empty}
+			\setcounter{page}{-1}
 			\ \vspace{-\headheight}\hrule
 			\vfill\vfill
 			\displaytitle
