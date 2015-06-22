@@ -482,7 +482,7 @@
 \if@proposal
 \else
 	\titleformat{\chapter}[display]
-		{\normalfont\LARGE\bfseries}
+		{\singlespacing\raggedright\normalfont\LARGE\bfseries}
 		{\chaptertitlename{} \thechapter}
 		{0em}
 		{\titlerule[2pt]\vspace{0.25em}\raggedleft\large}
@@ -491,7 +491,7 @@
 	\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
 	\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 	\titleformat{name=\chapter,numberless}[display]
-		{\bfseries}
+		{\singlespacing\raggedright\normalfont\bfseries}
 		{}
 		{-8em}
 		{\raggedright\Large}
@@ -638,7 +638,7 @@
 \renewcommand\appendix{\@setappendixtitleformat\@original@appendix}
 \newcommand\@setappendixtitleformat{
 	\titleformat{\chapter}[hang]
-		{\vspace{-18ex}\normalfont\Large\bfseries}
+		{\singlespacing\raggedright\vspace{-18ex}\normalfont\Large\bfseries}
 		{\chaptertitlename{} \thechapter:}
 		{1em}
 		{\Large}
@@ -647,9 +647,9 @@
 	\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
 	\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 	\titleformat{name=\chapter,numberless}[display]
-		{\bfseries}
+		{\singlespacing\raggedright\vspace{-18ex}\normalfont\Large\bfseries}
 		{}
-		{-5ex}
+		{1em}
 		{\raggedright\Large}
 		[\titlerule]
 }
@@ -668,7 +668,7 @@
 			%[\vspace{0.5em}]
 		\else
 			\titleformat{\chapter}[hang]
-				{\vspace{-18ex}\normalfont\Large\bfseries}
+				{\singlespace\raggedright\vspace{-18ex}\normalfont\Large\bfseries}
 				{\chaptertitlename{} \thechapter:}
 				{1em}
 				{\Large}
