@@ -7,27 +7,27 @@
 % Preliminary commands that are available to the user but are set by some class
 % options and are therefore defined here
 \newcommand*\@documenttype{\ClassError{ritthesis}
-	{\protect\@documenttype undefined. Use \protect\documenttype{} to set.}{}}
+	{\protect\@documenttype\ undefined. Use \protect\documenttype{} to set.}{}}
 \newcommand*\@degreefield{\ClassError{ritthesis}
 	{\protect\@degreefield undefined. Use \protect\degreefield{} to set}{}}
 \newcommand*\@degreename{\ClassError{ritthesis}
-	{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
+	{\protect\@degreename\ undefined. Use \protect\degreename{} to set.}{}}
 \newcommand*\@degreenameshort{\ClassError{ritthesis}
-	{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
+	{\protect\@degreename\ undefined. Use \protect\degreename{} to set.}{}}
 
 
 \newcommand*\@city{\ClassError{ritthesis}
-	{\protect\@city undefined. Use \protect\city{} to set.}{}}
+	{\protect\@city\ undefined. Use \protect\city{} to set.}{}}
 \newcommand*\@university{\ClassError{ritthesis}
-	{\protect\@university undefined. Use \protect\university{} to set.}{}}
+	{\protect\@university\ undefined. Use \protect\university{} to set.}{}}
 \newcommand*\@universityshort{\ClassError{ritthesis}
 	{\protect\@universityshort undefined. Use \protect\university{} to set.}{}}
 \newcommand*\@college{\ClassError{ritthesis}
-	{\protect\@college undefined. Use \protect\college{} to set.}{}}
+	{\protect\@college\ undefined. Use \protect\college{} to set.}{}}
 \newcommand*\@collegeshort{\ClassError{ritthesis}
 	{\protect\@collegeshort undefined. Use \protect\college{} to set.}{}}
 \newcommand*\@department{\ClassError{ritthesis}
-	{\protect\@department undefined. Use \protect\department{} to set.}{}}
+	{\protect\@department\ undefined. Use \protect\department{} to set.}{}}
 \newcommand\@logo{}
 \newcommand*\@logoopts{}
 
