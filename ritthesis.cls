@@ -403,14 +403,16 @@
 }}
 
 %%%%% Commands for making the signature sheet %%%%%
-% Committee members
 \newcommand*\@siglinelength\linewidth
 \newlength\@siglineheight
 \setlength\@siglineheight{1pt}
+% Spacing between individual committee members
 \newlength\@committeeskip
 \setlength\@committeeskip{5ex}
+% Space after "Certified By, etc."
 \newlength\@committeetablelabelskip
 \setlength\@committeetablelabelskip{5ex}
+% Space after a committee table and the next one
 \newlength\@committeetableskip
 \setlength\@committeetableskip{7ex}
 
@@ -421,100 +423,81 @@
 % #3 -> First MI
 % #4 -> Last
 % #5 -> Position
+% For backwards compatibility
+\def\specialcommittee{\committee}
 \newcommand*{\@committeetable}{}
-\newcommand*\addcommittee[5][Dr.]{\g@addto@macro\@committeetable{%
+\newcommand*\committee[5][Dr.]{\g@addto@macro\@committeetable{%
 	\rule{\linewidth}{\@siglineheight}\\
 	#1\ #3 #4 \textit{#5}\hfill Date\\
-	#2\vskip\@committeeskip\relax
+	#2\vskip\@committeeskip\relax%
 }}
-
-% For backwards compatibility
-\let\specialcommittee\addcommittee
 
 \newcommand*{\@certifiedbytable}{}
 \newcommand*{\certifiedby}[5][Dr.]{\g@addto@macro\@certifiedbytable{%
 	\rule{\linewidth}{\@siglineheight}\\
 	#1\ #3 #4 \textit{#5}\hfill Date\\
-	#2\vskip\@committeeskip\relax
+	#2\vskip\@committeeskip\relax%
 }}
 
-% Syntax for \advisor and \committee tables
+% Syntax for \advisor and \committee commands
 % \advisor[Position]{First}{Last}
 % \committee[Position]{First}{Last}
 \newcommand*{\advisor}[3]{
 	\providecommand{\@advisor}{Dr.\ \textsc{#2 #3}}
 	\addcommittee{#1}{#2}{#3}{Advisor}
 }
-\newcommand*{\committee}[3]{
-	\addcommittee{#1}{#2}{#3}{}
-}
+% todo: consider renaming this macro, or removing
+%\newcommand*{\committee}[3]{
+%	\addcommittee{#1}{#2}{#3}{}
+%}
 \newcommand*\setadvisor[3][Dr.]{
 	\providecommand{\@advisor}{#1\ \textsc{#2 #3}}
 }
 
-\newcommand{\makecommitteetable}{
-	\noindent
-	\begin{minipage}{\@siglinelength}
-		\small
-		\singlespacing
-		{\normalsize\bfseries Committee Approval:}\vskip\@committeetableskip
-		\@committeetable
-	\end{minipage}
-}
+\newcommand*\@certificationmessage{%
+	We, the undersigned committee members, certify that we have advised and/or
+	supervised the candidate on the work described in this dissertation. We
+	further certify that we have reviewed the dissertation manuscript and
+	approve it in partial fulfillment of the requirements of the degree of
+	\degreename{} in \degreefield{}.}
 
-\newcommand{\makemicrosyscommitteetable}{
-	\noindent
+\newcommand{\@makecommitteetable}{
 	\begin{minipage}{\@siglinelength}
-		\small
-		\singlespacing
-		\removelastskip
-		\@committeetable\removelastskip\vskip\@committeetableskip
-		{\normalsize\bfseries Certified By:}\vskip\@committeetablelabelskip
-		\@certifiedbytable
+		\setlength\parindent{0pt}\small
+		\@committeetable\removelastskip
+		\ifx\@certifiedbytable\empty
+		\else
+			\vskip\@committeetableskip
+			{\normalsize\bfseries Certified By:}\vskip\@committeetablelabelskip
+			\@certifiedbytable
+		\fi
 	\end{minipage}
 }
 
 \newcommand{\makesignaturepage}{
+	\cleardoublepage
+	\thispagestyle{plain}
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{Signature Sheet}
-	\thispagestyle{plain}
-	\begin{doublespace}
-	\if@microsys
-		\begin{center}
-			\displaytitle
-			
-			by
-			
-			\displayauthor
-		\end{center}
-		
-		\noindent\textbf{Committee Approval:}
-		
-		\begin{singlespace}
-			\small
-			\noindent We, the undersigned committee members, certify that we have advised and/or supervised the candidate on the work described in this dissertation. We further certify that we have reviewed the dissertation manuscript and approve it in partial fulfillment of the requirements of the degree of \degreename{} in \degreefield{}.
-		\end{singlespace}
-		
-		\vfill
-		
-		\makemicrosyscommitteetable
-				
-		\vfill
-	\else
+	\ \vspace{-\headheight}
+	{
+		\setsength\parindent{0pt}
+		\singlespacing
 		\begin{center}
 			\displaytitle
 			
 			\displayauthor
-			
-			\vfill
-			
-			\makecommitteetable
-			
-			\vfill
 		\end{center}
-	\fi
-	\end{doublespace}
-	\cleardoublepage
+		
+		\textbf{Committee Approval:}\\
+		{\small\@certificationmessage}
+		\centering
+		\vfill
+		
+		\@makecommitteetable
+		
+		\vfill
+	}
 }
 
 \newcommand{\makecopyrightpage}{
