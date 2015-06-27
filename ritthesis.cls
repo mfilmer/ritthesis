@@ -6,29 +6,72 @@
 
 % Preliminary commands that are available to the user but are set by some class
 % options and are therefore defined here
-\newcommand\@documenttype{\ClassError{ritthesis}{\protect\@documenttype undefined. Use \protect\documenttype{} to set.}{}}
-\newcommand\@degreefield{\ClassError{ritthesis}{\protect\@degreefield undefined. Use \protect\degreefield{} to set}{}}
-\newcommand\@degreename{\ClassError{ritthesis}{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
-\newcommand\@degreenameshort{\ClassError{ritthesis}{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
+\newcommand*\@documenttype{\ClassError{ritthesis}
+	{\protect\@documenttype undefined. Use \protect\documenttype{} to set.}{}}
+\newcommand*\@degreefield{\ClassError{ritthesis}
+	{\protect\@degreefield undefined. Use \protect\degreefield{} to set}{}}
+\newcommand*\@degreename{\ClassError{ritthesis}
+	{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
+\newcommand*\@degreenameshort{\ClassError{ritthesis}
+	{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
 
 
-\newcommand\@city{\ClassError{ritthesis}{\protect\@city undefined. Use \protect\city{} to set.}{}}
-\newcommand\@university{\ClassError{ritthesis}{\protect\@university undefined. Use \protect\university{} to set.}{}}
-\newcommand\@universityshort{\ClassError{ritthesis}{\protect\@universityshort undefined. Use \protect\university{} to set.}{}}
-\newcommand\@college{\ClassError{ritthesis}{\protect\@college undefined. Use \protect\college{} to set.}{}}
-\newcommand\@collegeshort{\ClassError{ritthesis}{\protect\@collegeshort undefined. Use \protect\college{} to set.}{}}
-\newcommand\@department{\ClassError{ritthesis}{\protect\@department undefined. Use \protect\department{} to set.}{}}
-\newcommand\@logo{\ClassError{ritthesis}{\protect\@logo undefined. Use \protect\logo{} to set.}{}}
+\newcommand*\@city{\ClassError{ritthesis}
+	{\protect\@city undefined. Use \protect\city{} to set.}{}}
+\newcommand*\@university{\ClassError{ritthesis}
+	{\protect\@university undefined. Use \protect\university{} to set.}{}}
+\newcommand*\@universityshort{\ClassError{ritthesis}
+	{\protect\@universityshort undefined. Use \protect\university{} to set.}{}}
+\newcommand*\@college{\ClassError{ritthesis}
+	{\protect\@college undefined. Use \protect\college{} to set.}{}}
+\newcommand*\@collegeshort{\ClassError{ritthesis}
+	{\protect\@collegeshort undefined. Use \protect\college{} to set.}{}}
+\newcommand*\@department{\ClassError{ritthesis}
+	{\protect\@department undefined. Use \protect\department{} to set.}{}}
+\newcommand\@logo{\ClassError{ritthesis}
+	{\protect\@logo undefined. Use \protect\logo{} to set.}{}}
+\newcommand*\@logoopts{\ClassError{ritthesis}
+	{\protect\@logoopts undefined. Use \protect\logo{} to set.}{}}
 
-\newcommand\documenttype[1]{\renewcommand\@documenttype{#1}}
-\newcommand\degreefield[1]{\renewcommand\@degreefield{#1}}
-\newcommand\degreename[2][\relax]{\renewcommand\@degreename{#2}\ifx#1\relax\renewcommand\@degreenameshort{#2}\else\renewcommand\@degreenameshort{#1}\fi}
+\newcommand*\documenttype[1]{\renewcommand\@documenttype{#1}}
+\newcommand*\degreefield[1]{\renewcommand\@degreefield{#1}}
+
+\@ifundefined{degreename}
+	\def\degreename{%
+		\@ifnextchar[{\@degnamecomplex}{\@degnamesimple}}
+	\def\@degnamesimple#1{%
+		\renewcommand\@degreename{#1}\renewcommand\@degreenameshort{#1}}
+	\def\@degnamecomplex[#1]#2{%
+		\renewcommand\@degreename{#2}\renewcommand\@degreenameshort{#1}}
+\fi
 
 \newcommand\city[1]{\renewcommand\@city{#1}}
-\newcommand\university[2][\relax]{\renewcommand\@university{#2}\ifx#1\relax\renewcommand\@universityshort{#2}\else\renewcommand\@universityshort{#1}\fi}
-\newcommand\college[2][\relax]{\renewcommand\@college{#2}\ifx#1\relax\renewcommand\@collegeshort{#2}\else\renewcommand\@collegeshort{#1}\fi}
 \newcommand\department[1]{\renewcommand\@department{#1}}
 \newcommand\logo[1]{\renewcommand\@logo{#1}}
+
+\@ifundefined{logo}
+	\def\logo{\@ifnextchar[{\@logob}{\@logoa}}
+	\long\def\@logoa#1{%
+		\renewcommand\@logo{#1}\renewcommand\@logoopts{}}
+	\long\def\@logob[#1]#2{%
+		\renewcommand\@logo{#2}\renewcommand\@logoopts{#1}}
+\fi
+
+\@ifundefined{university}
+	\def\university{\@ifnextchar[{\@universityb}{\@universitya}}
+	\def\@universitya#1{%
+		\renewcommand\@university{#1}\renewcommand\@universityshort{#1}}
+	\def\@universityb[#1]#2{%
+		\renewcommand\@university{#2}\renewcommand\@universityshort{#1}}
+\fi
+
+\@ifundefined{college}
+	\def\college{\@ifnextchar[{\@collegeb}{\@collegea}}
+	\def\@collegea#1{%
+		\renewcommand\@college{#1}\renewcommand\@collegeshort{#1}}
+	\def\@collegeb[#1]#2{%
+		\renewcommand\@college{#2}\renewcommand\@collegeshort{#1}}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
@@ -151,7 +194,7 @@
 	\degreename[MS]{Master of Science}
 	\college[KGCOE]{Kate Gleason College of Engineering}
 	\department{Department of Electrical and Microelectronic Engineering}
-	\logo{kgcoelogohoriz}
+	\logo[width=15em]{kgcoelogohoriz}
 }
 \DeclareOption{microsys}{
 	\@microsystrue
@@ -160,12 +203,12 @@
 	\degreename{PhD}{Doctorate of Philosophy}
 	\college[KGCOE]{Kate Gleason College of Engineering}
 	\department{Microsystems Engineering Department}
-	\logo{kgcoelogovert}
+	\logo[width=0.25\linewidth]{kgcoelogovert}
 }
 \DeclareOption{rit}{
 	\city{Rochester, New York}
 	\university[RIT]{Rochester Institute of Technology}
-	\logo{ritlogo}
+	\logo[width=15em]{ritlogo}
 }
 
 %%%%% Fallback %%%%%
@@ -257,20 +300,24 @@
 %%%%% Front Matter %%%%%
 
 % Commands to track information about the author and document
-\renewcommand\@author{\ClassError{ritthesis}{\protect\@author undefined. Use \protect\author{} to set.}{}}
+\renewcommand\@author{\ClassError{ritthesis}
+	{\protect\@author undefined. Use \protect\author{} to set.}{}}
 \renewcommand\author[1]{\renewcommand\@author{#1}}
 
 \renewcommand\@date\today
 \renewcommand\date[1]{\renewcommand\@date{#1}}
 
-\renewcommand\@title{\ClassError{ritthesis}{\protect\@title undefined. Use \protect\title{} to set.}{}}
+\renewcommand\@title{\ClassError{ritthesis}
+	{\protect\@title undefined. Use \protect\title{} to set.}{}}
 \renewcommand\title[1]{\renewcommand\@title{#1}}
 
 % How things get displayed
 \newcommand\thetitle{\textbf{\Large\@title}}
 \newcommand\theauthor{\textsc{\@author}}
 
+% Title page(s)
 \newcommand\maketitlepage{{
+	\cleardoublepage
 	\singlespacing
 	\centering
 	\pagestyle{empty}
@@ -354,6 +401,78 @@
 		\cleardoublepage
 	\fi
 }}
+
+%%%%% Commands for making the signature sheet %%%%%
+% Committee members
+\newcommand*\@siglinelength\linewidth
+\newlength\@siglineheight
+\setlength\@siglineheight{1pt}
+\newlength\@committeeskip
+\setlength\@committeeskip{5ex}
+\newlength\@committeetablelabelskip
+\setlength\@committeetablelabelskip{5ex}
+\newlength\@committeetableskip
+\setlength\@committeetableskip{7ex}
+
+% Syntax of \addcommittee is:
+% \addcommittee[Title (Dr.)]{Position (Prof)}{First MI.}{Last}{Role (Advisor)}
+% #1 -> Title
+% #2 -> Position
+% #3 -> First MI
+% #4 -> Last
+% #5 -> Position
+\newcommand*{\@committeetable}{}
+\newcommand*\addcommittee[5][Dr.]{\g@addto@macro\@committeetable{%
+	\rule{\linewidth}{\@siglineheight}\\
+	#1\ #3 #4 \textit{#5}\hfill Date\\
+	#2\vskip\@committeeskip\relax
+}}
+
+% For backwards compatibility
+\let\specialcommittee\addcommittee
+
+\newcommand*{\@certifiedbytable}{}
+\newcommand*{\certifiedby}[5][Dr.]{\g@addto@macro\@certifiedbytable{%
+	\rule{\linewidth}{\@siglineheight}\\
+	#1\ #3 #4 \textit{#5}\hfill Date\\
+	#2\vskip\@committeeskip\relax
+}}
+
+% Syntax for \advisor and \committee tables
+% \advisor[Position]{First}{Last}
+% \committee[Position]{First}{Last}
+\newcommand*{\advisor}[3]{
+	\providecommand{\@advisor}{Dr.\ \textsc{#2 #3}}
+	\addcommittee{#1}{#2}{#3}{Advisor}
+}
+\newcommand*{\committee}[3]{
+	\addcommittee{#1}{#2}{#3}{}
+}
+\newcommand*\setadvisor[3][Dr.]{
+	\providecommand{\@advisor}{#1\ \textsc{#2 #3}}
+}
+
+\newcommand{\makecommitteetable}{
+	\noindent
+	\begin{minipage}{\@siglinelength}
+		\small
+		\singlespacing
+		{\normalsize\bfseries Committee Approval:}\vskip\@committeetableskip
+		\@committeetable
+	\end{minipage}
+}
+
+\newcommand{\makemicrosyscommitteetable}{
+	\noindent
+	\begin{minipage}{\@siglinelength}
+		\small
+		\singlespacing
+		\removelastskip
+		\@committeetable\removelastskip\vskip\@committeetableskip
+		{\normalsize\bfseries Certified By:}\vskip\@committeetablelabelskip
+		\@certifiedbytable
+	\end{minipage}
+}
 
 \newcommand{\makesignaturepage}{
 	\phantomsection
@@ -443,27 +562,6 @@
 		\cleardoublepage
 	\end{\tocspacing}
 }
-\newcommand{\makecommitteetable}{
-	\noindent
-	\begin{minipage}{\@siglinelength}
-		\small
-		\singlespacing
-		{\normalsize\bfseries Committee Approval:}\vskip\@committeetableskip
-		\@committeetable
-	\end{minipage}
-}
-
-\newcommand{\makemicrosyscommitteetable}{
-	\noindent
-	\begin{minipage}{\@siglinelength}
-		\small
-		\singlespacing
-		\removelastskip
-		\@committeetable\removelastskip\vskip\@committeetableskip
-		{\normalsize\bfseries Certified By:}\vskip\@committeetablelabelskip
-		\@certifiedbytable
-	\end{minipage}
-}
 
 % Chapter headings
 \setcounter{secnumdepth}{3}
@@ -496,54 +594,6 @@
 	\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
 \fi
 
-% Committee members
-\newcommand*\@siglinelength\linewidth
-\newlength\@siglineheight
-\setlength\@siglineheight{1pt}
-\newlength\@committeeskip
-\setlength\@committeeskip{5ex}
-\newlength\@committeetablelabelskip
-\setlength\@committeetablelabelskip{5ex}
-\newlength\@committeetableskip
-\setlength\@committeetableskip{7ex}
-
-% Syntax of \addcommittee is:
-% \addcommittee[Title (Dr.)]{Position (Prof)}{First MI.}{Last}{Role (Advisor)}
-% #1 -> Title
-% #2 -> Position
-% #3 -> First MI
-% #4 -> Last
-% #5 -> Position
-\newcommand*{\@committeetable}{}
-\newcommand*\addcommittee[5][Dr.]{\g@addto@macro\@committeetable{%
-	\rule{\linewidth}{\@siglineheight}\\
-	#1\ #3 #4 \textit{#5}\hfill Date\\
-	#2\vskip\@committeeskip\relax
-}}
-
-% For backwards compatibility
-\let\specialcommittee\addcommittee
-
-\newcommand*{\@certifiedbytable}{}
-\newcommand*{\certifiedby}[5][Dr.]{\g@addto@macro\@certifiedbytable{%
-	\rule{\linewidth}{\@siglineheight}\\
-	#1\ #3 #4 \textit{#5}\hfill Date\\
-	#2\vskip\@committeeskip\relax
-}}
-
-% Syntax for \advisor and \committee tables
-% \advisor[Position]{First}{Last}
-% \committee[Position]{First}{Last}
-\newcommand*{\advisor}[3]{
-	\providecommand{\@advisor}{Dr.\ \textsc{#2 #3}}
-	\addcommittee{#1}{#2}{#3}{Advisor}
-}
-\newcommand*{\committee}[3]{
-	\addcommittee{#1}{#2}{#3}{}
-}
-\newcommand*\setadvisor[3][Dr.]{
-	\providecommand{\@advisor}{#1\ \textsc{#2 #3}}
-}
 
 % Bibliography
 \newcommand{\makebibliography}[1]{ %
