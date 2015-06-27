@@ -31,44 +31,44 @@
 \newcommand\@logo{}
 \newcommand*\@logoopts{}
 
-\newcommand*\documenttype[1]{\renewcommand\@documenttype{#1}}
-\newcommand*\degreefield[1]{\renewcommand\@degreefield{#1}}
+\newcommand*\documenttype[1]{\renewcommand*\@documenttype{#1}}
+\newcommand*\degreefield[1]{\renewcommand*\@degreefield{#1}}
 
 %\@ifundefined{degreename}
 	\def\degreename{%
 		\@ifnextchar[{\@degnamecomplex}{\@degnamesimple}}
 	\def\@degnamesimple#1{%
-		\renewcommand\@degreename{#1}\renewcommand\@degreenameshort{#1}}
+		\renewcommand*\@degreename{#1}\renewcommand*\@degreenameshort{#1}}
 	\def\@degnamecomplex[#1]#2{%
-		\renewcommand\@degreename{#2}\renewcommand\@degreenameshort{#1}}
+		\renewcommand*\@degreename{#2}\renewcommand*\@degreenameshort{#1}}
 %\fi
 
-\newcommand\city[1]{\renewcommand\@city{#1}}
-\newcommand\department[1]{\renewcommand\@department{#1}}
+\newcommand*\city[1]{\renewcommand*\@city{#1}}
+\newcommand*\department[1]{\renewcommand*\@department{#1}}
 \newcommand\logo[1]{\renewcommand\@logo{#1}}
 
 %\@ifundefined{logo}
 	\def\logo{\@ifnextchar[{\@logob}{\@logoa}}
 	\long\def\@logoa#1{%
-		\renewcommand\@logo{#1}\renewcommand\@logoopts{}}
+		\renewcommand\@logo{#1}\renewcommand*\@logoopts{}}
 	\long\def\@logob[#1]#2{%
-		\renewcommand\@logo{#2}\renewcommand\@logoopts{#1}}
+		\renewcommand\@logo{#2}\renewcommand*\@logoopts{#1}}
 %\fi
 
 %\@ifundefined{university}
 	\def\university{\@ifnextchar[{\@universityb}{\@universitya}}
 	\def\@universitya#1{%
-		\renewcommand\@university{#1}\renewcommand\@universityshort{#1}}
+		\renewcommand*\@university{#1}\renewcommand*\@universityshort{#1}}
 	\def\@universityb[#1]#2{%
-		\renewcommand\@university{#2}\renewcommand\@universityshort{#1}}
+		\renewcommand*\@university{#2}\renewcommand*\@universityshort{#1}}
 %\fi
 
 %\@ifundefined{college}
 	\def\college{\@ifnextchar[{\@collegeb}{\@collegea}}
 	\def\@collegea#1{%
-		\renewcommand\@college{#1}\renewcommand\@collegeshort{#1}}
+		\renewcommand*\@college{#1}\renewcommand*\@collegeshort{#1}}
 	\def\@collegeb[#1]#2{%
-		\renewcommand\@college{#2}\renewcommand\@collegeshort{#1}}
+		\renewcommand*\@college{#2}\renewcommand*\@collegeshort{#1}}
 %\fi
 
 \newcommand*\@certificationmessage{}
