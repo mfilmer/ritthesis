@@ -121,11 +121,11 @@
 }
 
 % Line spacing for the lists (toc, lof and lot)
-\newcommand\@listspacing\undefined
-\newcommand\@tocspacing\@listspacing
-\newcommand\@lofspacing\@listspacing
-\newcommand\@lotspacing\@listspacing
-\newcommand\@losspacing\@listspacing
+\newcommand*\@listspacing\undefined
+\newcommand*\@tocspacing\@listspacing
+\newcommand*\@lofspacing\@listspacing
+\newcommand*\@lotspacing\@listspacing
+\newcommand*\@losspacing\@listspacing
 \DeclareOption{singlespacelists}{
 	\renewcommand\@listspacing\singlespacing
 }
