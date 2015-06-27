@@ -447,8 +447,6 @@
 % #3 -> First MI
 % #4 -> Last
 % #5 -> Position
-% For backwards compatibility
-\def\specialcommittee{\committee}
 \newcommand*{\@committeetable}{}
 \newcommand*\committee[5][Dr.]{\g@addto@macro\@committeetable{%
 	\rule{\linewidth}{\@siglineheight}\\
