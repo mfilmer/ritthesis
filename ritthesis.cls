@@ -106,18 +106,18 @@
 }
 
 % Line spacing in the main document
-\newcommand\@documentspacing\undefined
+\newcommand*\@documentspacing\undefined
 \DeclareOption{singlespacing}{
 	\PassOptionsToPackage{singlespacing}{setspace}
-	\renewcommand\@documentspacing\singlespacing
+	\renewcommand*\@documentspacing\singlespacing
 }
 \DeclareOption{onehalfspacing}{
 	\PassOptionsToPackage{onehalfspacing}{setspace}
-	\renewcommand\@documentspacing\onehalfspacing
+	\renewcommand*\@documentspacing\onehalfspacing
 }
 \DeclareOption{doublespacing}{
 	\PassOptionsToPackage{doublespacing}{setspace}
-	\renewcommand\@documentspacing\doublespacing
+	\renewcommand*\@documentspacing\doublespacing
 }
 
 % Line spacing for the lists (toc, lof and lot)
@@ -127,13 +127,13 @@
 \newcommand*\@lotspacing\@listspacing
 \newcommand*\@losspacing\@listspacing
 \DeclareOption{singlespacelists}{
-	\renewcommand\@listspacing\singlespacing
+	\renewcommand*\@listspacing\singlespacing
 }
 \DeclareOption{onehalfspacelists}{
-	\renewcommand\@listspacing\onehalfspacing
+	\renewcommand*\@listspacing\onehalfspacing
 }
 \DeclareOption{doublespacelists}{
-	\renewcommand\@listspacing\doublespacing
+	\renewcommand*\@listspacing\doublespacing
 }
 
 % Line spacing for the bibliography
