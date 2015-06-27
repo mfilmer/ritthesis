@@ -18,7 +18,7 @@
 % Additionally, the \setadvisor macro should be used (in addition to a
 % \specialcommittee for the advisor) to store the advisor's name for use on the
 % title page
-\documentclass[]{ritthesis}
+\documentclass[microe]{ritthesis}
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%% Packages %%%%%
@@ -36,12 +36,6 @@
 % subtables (or any other functionality it provides) is desired. It will not
 % work if the subfig package is used.
 \usepackage{subcaption}
-
-% This command is used to set a consistent head height. If there are Fancyhdr
-% warnings that it is too small, increase it. This should not happen unless
-% headers of more than two lines are used. If only single line headers are used,
-% this line can likely be removed
-\setlength{\headheight}{23pt}
 
 % Use these commands to set up the author, title, and date
 \author{Matthew J. Filmer}
@@ -209,7 +203,7 @@ The first paragraph in a chapter\footnote{and probably section} is not indented.
 \subparagraph{subparagraph}
 
 \lipsum{}
-\chapter{Everyone knows, the second chapter is the best chapter}
+\chapter[Everyone knows]{Everyone knows, the second chapter is the best chapter}
 \lipsum{}
 
 % Also include figures the normal way, using the graphicx package, or however

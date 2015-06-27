@@ -262,14 +262,15 @@
 	\if@header
 		\fancyhead[L]{\footnotesize\textbf\leftmark}
 		\renewcommand{\headrulewidth}{0.7pt}
+	\else
+		\renewcommand\headrulewidth{0pt}
 	\fi
 	% Plain page style
 	\fancypagestyle{plain}{%
 		\fancyhf{}
 		\fancyfoot[\@pagenumpos]{\thepage}
 		\renewcommand{\headrulewidth}{0pt}
-		\renewcommand{\footrulewidth}{0pt}
-		}
+		\renewcommand{\footrulewidth}{0pt}}
 }
 
 
@@ -337,8 +338,7 @@
 	\pagestyle{empty}
 	\if@microsys
 		\setcounter{page}{0}
-		\ \vspace{-\headheight}\hrule
-		\
+		\ \vspace{-12pt}
 		\vfill
 		
 		\ifx\@logoopts\empty
@@ -378,7 +378,7 @@
 	\else
 		\pagestyle{empty}
 		\setcounter{page}{-1}
-		\ \vspace{-\headheight}
+		\ \vspace{-12pt}
 		\hrule
 		\vfill\vfill
 		\thetitle
@@ -390,7 +390,8 @@
 		\vfill\vfill
 		\hrule
 		\cleardoublepage
-		\ \vspace{-\headheight}\hrule
+		\ \vspace{-12pt}
+		\hrule
 		\vfill
 		\thetitle
 		
