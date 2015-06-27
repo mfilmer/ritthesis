@@ -71,7 +71,7 @@
 		\renewcommand*\@college{#2}\renewcommand*\@collegeshort{#1}}
 %\fi
 
-\newcommand*\@certificationmessage{}
+\newcommand\@certificationmessage{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
