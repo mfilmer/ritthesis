@@ -122,6 +122,10 @@
 
 % Line spacing for the lists (toc, lof and lot)
 \newcommand\@listspacing\undefined
+\newcommand\@tocspacing\@listspacing
+\newcommand\@lofspacing\@listspacing
+\newcommand\@lotspacing\@listspacing
+\newcommand\@losspacing\@listspacing
 \DeclareOption{singlespacelists}{
 	\renewcommand\@listspacing\singlespacing
 }
@@ -517,18 +521,20 @@
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
 
 \newcommand{\makealllists}{%
-	\cleardoublepage
 	{%
-		\@listspacing
+		\cleardoublepage
 		\phantomsection
+		\@tocspacing
 		\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
 		\cleardoublepage
 		\phantomsection
+		\@lofspacing
 		\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
 		\cleardoublepage%
 		\phantomsection
+		\@lotspacing
 		\addcontentsline{toc}{\@toplevel}{List of Tables}\listoftables
-		\cleardoublepage
+		\cleardoublepage%
 	}
 }
 
@@ -623,7 +629,7 @@
 		\addcontentsline{toc}{\@toplevel}{#1}
 		\pagestyle{plain}
 		\centering
-		\@listspacing
+		\@losspacing
 		\begin{longtable}{#2}
 			\toprule
 			#3\\
