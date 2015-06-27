@@ -28,50 +28,50 @@
 	{\protect\@collegeshort undefined. Use \protect\college{} to set.}{}}
 \newcommand*\@department{\ClassError{ritthesis}
 	{\protect\@department undefined. Use \protect\department{} to set.}{}}
-\newcommand\@logo{\ClassError{ritthesis}
-	{\protect\@logo undefined. Use \protect\logo{} to set.}{}}
-\newcommand*\@logoopts{\ClassError{ritthesis}
-	{\protect\@logoopts undefined. Use \protect\logo{} to set.}{}}
+\newcommand\@logo{}
+\newcommand*\@logoopts{}
 
 \newcommand*\documenttype[1]{\renewcommand\@documenttype{#1}}
 \newcommand*\degreefield[1]{\renewcommand\@degreefield{#1}}
 
-\@ifundefined{degreename}
+%\@ifundefined{degreename}
 	\def\degreename{%
 		\@ifnextchar[{\@degnamecomplex}{\@degnamesimple}}
 	\def\@degnamesimple#1{%
 		\renewcommand\@degreename{#1}\renewcommand\@degreenameshort{#1}}
 	\def\@degnamecomplex[#1]#2{%
 		\renewcommand\@degreename{#2}\renewcommand\@degreenameshort{#1}}
-\fi
+%\fi
 
 \newcommand\city[1]{\renewcommand\@city{#1}}
 \newcommand\department[1]{\renewcommand\@department{#1}}
 \newcommand\logo[1]{\renewcommand\@logo{#1}}
 
-\@ifundefined{logo}
+%\@ifundefined{logo}
 	\def\logo{\@ifnextchar[{\@logob}{\@logoa}}
 	\long\def\@logoa#1{%
 		\renewcommand\@logo{#1}\renewcommand\@logoopts{}}
 	\long\def\@logob[#1]#2{%
 		\renewcommand\@logo{#2}\renewcommand\@logoopts{#1}}
-\fi
+%\fi
 
-\@ifundefined{university}
+%\@ifundefined{university}
 	\def\university{\@ifnextchar[{\@universityb}{\@universitya}}
 	\def\@universitya#1{%
 		\renewcommand\@university{#1}\renewcommand\@universityshort{#1}}
 	\def\@universityb[#1]#2{%
 		\renewcommand\@university{#2}\renewcommand\@universityshort{#1}}
-\fi
+%\fi
 
-\@ifundefined{college}
+%\@ifundefined{college}
 	\def\college{\@ifnextchar[{\@collegeb}{\@collegea}}
 	\def\@collegea#1{%
 		\renewcommand\@college{#1}\renewcommand\@collegeshort{#1}}
 	\def\@collegeb[#1]#2{%
 		\renewcommand\@college{#2}\renewcommand\@collegeshort{#1}}
-\fi
+%\fi
+
+\newcommand*\@certificationmessage{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
@@ -194,21 +194,34 @@
 	\degreename[MS]{Master of Science}
 	\college[KGCOE]{Kate Gleason College of Engineering}
 	\department{Department of Electrical and Microelectronic Engineering}
-	\logo[width=15em]{kgcoelogohoriz}
+	\logo[15em]{kgcoelogohoriz}
+	\city{Rochester, New York}
+	\university[RIT]{Rochester Institute of Technology}
 }
 \DeclareOption{microsys}{
 	\@microsystrue
 	\documenttype{Dissertation}
 	\degreefield{Microsystems Engineering}
-	\degreename{PhD}{Doctorate of Philosophy}
+	\degreename[PhD]{Doctorate of Philosophy}
 	\college[KGCOE]{Kate Gleason College of Engineering}
 	\department{Microsystems Engineering Department}
-	\logo[width=0.25\linewidth]{kgcoelogovert}
+	\logo[0.25\linewidth]{kgcoelogovert}
+	\renewcommand*\@certificationmessage{%
+		We, the undersigned committee members, certify that we have advised and/or
+		supervised the candidate on the work described in this dissertation. We
+		further certify that we have reviewed the dissertation manuscript and
+		approve it in partial fulfillment of the requirements of the degree of
+		\@degreename\ in \@degreefield.}
+	\city{Rochester, New York}
+	\university[RIT]{Rochester Institute of Technology}
 }
 \DeclareOption{rit}{
 	\city{Rochester, New York}
 	\university[RIT]{Rochester Institute of Technology}
-	\logo[width=15em]{ritlogo}
+	\ifx\@logo\empty
+	\logo[10em]{ritlogo}
+	\else
+	\fi
 }
 
 %%%%% Fallback %%%%%
@@ -295,10 +308,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% Misc. Commands %%%%%
-\providecommand{\phantomsection}{}		% Make work with or without hyperref
+\providecommand\phantomsection{}		% Make work with or without hyperref
 
 %%%%% Front Matter %%%%%
-\newcommand{\frontmatter}{\pagenumbering{roman}\maketitlepage\makesignaturepage}
+\newcommand\frontmatter{\pagenumbering{roman}\maketitlepage\makesignaturepage}
 
 % Commands to track information about the author and document
 \renewcommand\@author{\ClassError{ritthesis}
@@ -328,7 +341,11 @@
 		\
 		\vfill
 		
-		\includegraphics[width=0.25\linewidth]{\@logo}
+		\ifx\@logoopts\empty
+			\includegraphics{\@logo}
+		\else
+			\includegraphics[width=\@logoopts]{\@logo}
+		\fi
 		
 		\vfill
 		
@@ -338,8 +355,8 @@
 		
 		\vfill
 		
-		A \MakeLowercase{\documentname} submitted in partial fulfillment of the requirements\\
-		for the degree of \degreename\ in \degreefield\
+		A \MakeLowercase{\@documenttype} submitted in partial fulfillment of the requirements\\
+		for the degree of \@degreename\ in \@degreefield\
 		
 		\vfill
 		
@@ -385,13 +402,17 @@
 		A Thesis Submitted\\
 		in Partial Fulfillment\\
 		of the Requirements for the Degree of\\
-		\@degree\\
+		\@degreename\\
 		in\\
 		\@degreefield
 		
 		\vfill
 		
-		\includegraphics[width=15em]{\@logo}
+		\ifx\@logoopts\empty
+			\includegraphics{\@logo}
+		\else
+			\includegraphics[width=\@logoopts]{\@logo}
+		\fi
 		
 		\vfill
 		
@@ -445,7 +466,7 @@
 % \committee[Position]{First}{Last}
 \newcommand*{\advisor}[3]{
 	\providecommand{\@advisor}{Dr.\ \textsc{#2 #3}}
-	\addcommittee{#1}{#2}{#3}{Advisor}
+	\committee{#1}{#2}{#3}{Advisor}
 }
 % todo: consider renaming this macro, or removing
 %\newcommand*{\committee}[3]{
@@ -454,13 +475,6 @@
 \newcommand*\setadvisor[3][Dr.]{
 	\providecommand{\@advisor}{#1\ \textsc{#2 #3}}
 }
-
-\newcommand*\@certificationmessage{%
-	We, the undersigned committee members, certify that we have advised and/or
-	supervised the candidate on the work described in this dissertation. We
-	further certify that we have reviewed the dissertation manuscript and
-	approve it in partial fulfillment of the requirements of the degree of
-	\degreename{} in \degreefield{}.}
 
 \newcommand{\@makecommitteetable}{
 	\begin{minipage}{\@siglinelength}
@@ -480,24 +494,30 @@
 	\thispagestyle{plain}
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{Signature Sheet}
-	\ \vspace{-\headheight}
 	{
-		\setsength\parindent{0pt}
+		\setlength\parindent{0pt}
 		\singlespacing
 		\begin{center}
-			\displaytitle
+			\thetitle
 			
-			\displayauthor
+			\theauthor
 		\end{center}
 		
-		\textbf{Committee Approval:}\\
-		{\small\@certificationmessage}
-		\centering
 		\vfill
+		\textbf{Committee Approval:}\vspace{0.5em}
+		
+		{\small\@certificationmessage}
+		
+		\centering
+		\ifx\@certificationmessage\empty
+		\vskip\@committeetablelabelskip
+		\else
+		\vfill\vfill\vfill
+		\fi
 		
 		\@makecommitteetable
 		
-		\vfill
+		\vfill\vfill
 	}
 }
 

@@ -18,7 +18,7 @@
 % Additionally, the \setadvisor macro should be used (in addition to a
 % \specialcommittee for the advisor) to store the advisor's name for use on the
 % title page
-\documentclass{ritthesis}
+\documentclass[microe]{ritthesis}
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%% Packages %%%%%
@@ -72,10 +72,11 @@
 % Used to create the lines on the signature sheet. There is an optional first
 % argument for each of these to specify title (the default is Dr.)
 \advisor{Assistant Professor}{Joe}{Smith}
-\committee{Dean of the College}{Philip}{Jones}
-\addcommittee[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
+\committee{Professor}{Thomas}{Thomas}{}
+\committee{Dean of the College}{Philip}{Jones}{}
+%\committee[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
 
-% These are only used for the microsys signature sheet
+% If you want a second "Certified By" section
 \certifiedby[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
 \certifiedby[Mr.]{Bystander}{Robert}{van Rosenson XXXVIII}{King of the Committee}
 
@@ -91,7 +92,7 @@
 
 % Begin the document, the way you always do in LaTeX
 \begin{document}
-
+	
 % This starts the pages that get roman numerals at the beginning of the
 % document. Generally is the first thing in the document. 
 \frontmatter
