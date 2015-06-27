@@ -298,6 +298,7 @@
 \providecommand{\phantomsection}{}		% Make work with or without hyperref
 
 %%%%% Front Matter %%%%%
+\newcommand{\frontmatter}{\pagenumbering{roman}\maketitlepage\makesignaturepage}
 
 % Commands to track information about the author and document
 \renewcommand\@author{\ClassError{ritthesis}
@@ -500,50 +501,23 @@
 	}
 }
 
-\newcommand{\makecopyrightpage}{
-	\thispagestyle{plain}
-	\begin{center}
-		\displaytitle
-		
-		\displayauthor
-	\end{center}
-	\vspace{5ex}
-	\begin{singlespace}
-		\noindent
-		I, \@author{}, hereby grant permission to the Wallace Memorial Library
-		of the Rochester Institute of Technology to reproduce this document in
-		whole or in part, such that any reproduction will not be for commercial
-		use or profit.
-		
-		\vspace{10ex}
-		\noindent
-		\rule{15em}{0.7pt}\hfill\rule{10em}{0.7pt}
-		
-		\noindent
-		\@author\hfill{}Date
-	\end{singlespace}
-	\cleardoublepage
-}
-\if@proposal
-	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage}
-\else
-	\newcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\if@copyrightpage\makecopyrightpage\fi}
-\fi
+%%%%% Main Matter %%%%%
 \newcommand{\mainmatter}{\pagenumbering{arabic}}
-\newcommand\tocspacing{singlespace}
+
 \newcommand{\makealllists}{%
 	\cleardoublepage
-	\begin{\tocspacing}
+	{%
+		\@listspacing
 		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{Table of Contents}\tableofcontents
 		\cleardoublepage
 		\phantomsection
+		\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
+		\cleardoublepage%
+		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{List of Tables}\listoftables
 		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{\@toplevel}{List of Figures}\listoffigures
-		\cleardoublepage
-	\end{\tocspacing}
+	}
 }
 
 % Chapter headings
@@ -567,82 +541,82 @@
 		[\titlerule]
 \fi
 
-% Roman numbering
-\pagenumbering{roman}
 
 % Header formatting stuff
-\if@nohead
-\else
+\if@header
 	\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. #1}{}}
 	\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}{}}
 \fi
 
 
 % Bibliography
-\newcommand{\makebibliography}[1]{ %
+\newcommand{\makebibliography}[1]{%
 	\cleardoublepage
 	\phantomsection
 	\addcontentsline{toc}{\@toplevel}{Bibliography}
 	\bibliographystyle{IEEEtran}
-	\begin{\bibspacing}
+	{
+		\@bibspacing
 		\bibliography{#1}
-	\end{\bibspacing}
+	}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Environments %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewenvironment{abstract}
-	{
+	{%
 		\cleardoublepage
 		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{\abstractname}
 		\pagestyle{plain}
 		\begin{center}
-			\textbf{\large{}\abstractname}
-		\end{center}
+			\textbf{\large\abstractname}
+		\end{center}%
 	}
 	{\cleardoublepage}
 
 \newcommand{\acknowledgmentsname}{Acknowledgments}
 \newenvironment{acknowledgments}
-	{
+	{%
 		\cleardoublepage
 		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{\acknowledgmentsname}
 		\pagestyle{plain}
 		\begin{center}
-			\textbf{\large{}\acknowledgmentsname}
-		\end{center}
+			\textbf{\large\acknowledgmentsname}
+		\end{center}%
 	}
 	{\cleardoublepage}
 
 \newcommand{\dedicationname}{Dedication}
 \newenvironment{dedication}
-	{
+	{%
 		\cleardoublepage
 		\phantomsection
 		\addcontentsline{toc}{\@toplevel}{\dedicationname}
 		\pagestyle{plain}
-		\ \vfill
+		\centering\itshape
+		\ \vfill%
 	}
 	{\vfill\cleardoublepage}
 
 \newcommand{\listofsymbname}{List of Symbols}
-\newcommand\losspacing{onehalfspace}
 \newenvironment{listofsymbols}[3][\listofsymbname]
 	{
 		\cleardoublepage
 		\phantomsection
-		\if@proposal
-			\section*{#1}
-		\else
-			\chapter*{#1}
-		\fi
+		% todo: make sure this works
+		\csname\@toplevel\endcsname*{#1}
+		%\if@proposal
+		%	\section*{#1}
+		%\else
+		%	\chapter*{#1}
+		%\fi
 		\addcontentsline{toc}{\@toplevel}{#1}
 		\pagestyle{plain}
 		\centering
-		\begin{\losspacing}
+		\@listspacing
 		\begin{longtable}{#2}
 			\toprule
 			#3\\
@@ -651,7 +625,7 @@
 			\bottomrule
 			\endfoot
 	}
-	{\end{longtable}\end{\losspacing}\cleardoublepage}
+	{\end{longtable}\cleardoublepage}
 
 
 % Setting the chapter title formatting different for appenndices
@@ -697,15 +671,13 @@
 		\fi
 		
 		\@original@appendix
-		\if@nohead
-		\else
+		\if@header
 			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{}: ##1}{}}
 		\fi
 		\chapter{#1}
 	}
 	{
-		\if@nohead
-		\else
+		\if@header
 			\renewcommand{\chaptermark}[1]{\markboth{\chaptertitlename{} \thechapter. ##1}{}}
 		\fi
 	}
