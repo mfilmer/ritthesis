@@ -378,7 +378,8 @@
 	\else
 		\pagestyle{empty}
 		\setcounter{page}{-1}
-		\ \vspace{-\headheight}\hrule
+		\ \vspace{-\headheight}
+		\hrule
 		\vfill\vfill
 		\thetitle
 		
