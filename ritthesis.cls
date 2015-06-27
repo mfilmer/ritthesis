@@ -1,371 +1,359 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ritthesis}[2015/06/17]
+\ProvidesClass{ritthesis}[2015/06/27]
 
 % Requirements for title and signature sheets takes from:
 % http://infoguides.rit.edu/thesis-services
 
-%%%%% Handle Options %%%%%
-% Create conditionals
-\newif\if@twoside
-\newif\if@proposal
-\newif\if@microsys
-\newif\if@nohead
-\newif\if@copyrightpage
-\newcommand{\@toplevel}{chapter}
+% Preliminary commands that are available to the user but are set by some class
+% options and are therefore defined here
+\newcommand\@documenttype{\ClassError{ritthesis}{\protect\@documenttype undefined. Use \protect\documenttype{} to set.}{}}
+\newcommand\@degreefield{\ClassError{ritthesis}{\protect\@degreefield undefined. Use \protect\degreefield{} to set}{}}
+\newcommand\@degreename{\ClassError{ritthesis}{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
+\newcommand\@degreenameshort{\ClassError{ritthesis}{\protect\@degreename undefined. Use \protect\degreename{} to set.}{}}
 
-% Names of things dependent on class options
-\newcommand{\documentname}{Thesis}
-\newcommand{\degreename}{Master of Science}
-\newcommand{\degreefield}{Microelectronic Engineering}
+
+\newcommand\@city{\ClassError{ritthesis}{\protect\@city undefined. Use \protect\city{} to set.}{}}
+\newcommand\@university{\ClassError{ritthesis}{\protect\@university undefined. Use \protect\university{} to set.}{}}
+\newcommand\@universityshort{\ClassError{ritthesis}{\protect\@universityshort undefined. Use \protect\university{} to set.}{}}
+\newcommand\@college{\ClassError{ritthesis}{\protect\@college undefined. Use \protect\college{} to set.}{}}
+\newcommand\@collegeshort{\ClassError{ritthesis}{\protect\@collegeshort undefined. Use \protect\college{} to set.}{}}
+\newcommand\@department{\ClassError{ritthesis}{\protect\@department undefined. Use \protect\department{} to set.}{}}
+\newcommand\@logo{\ClassError{ritthesis}{\protect\@logo undefined. Use \protect\logo{} to set.}{}}
+
+\newcommand\documenttype[1]{\renewcommand\@documenttype{#1}}
+\newcommand\degreefield[1]{\renewcommand\@degreefield{#1}}
+\newcommand\degreename[2][\relax]{\renewcommand\@degreename{#2}\ifx#1\relax\renewcommand\@degreenameshort{#2}\else\renewcommand\@degreenameshort{#1}\fi}
+
+\newcommand\city[1]{\renewcommand\@city{#1}}
+\newcommand\university[2][\relax]{\renewcommand\@university{#2}\ifx#1\relax\renewcommand\@universityshort{#2}\else\renewcommand\@universityshort{#1}\fi}
+\newcommand\college[2][\relax]{\renewcommand\@college{#2}\ifx#1\relax\renewcommand\@collegeshort{#2}\else\renewcommand\@collegeshort{#1}\fi}
+\newcommand\department[1]{\renewcommand\@department{#1}}
+\newcommand\logo[1]{\renewcommand\@logo{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%           Options           %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% General Settings %%%%%
 
 % Font Size
 \DeclareOption{10pt}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
+	\PassOptionsToClass\CurrentOption{report}
+	\PassOptionsToClass\CurrentOption{report}
 }
 \DeclareOption{11pt}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
+	\PassOptionsToClass\CurrentOption{report}
+	\PassOptionsToClass\CurrentOption{report}
 }
 \DeclareOption{12pt}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
-}
-
-% Paper Size
-\DeclareOption{a4paper}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
-}
-\DeclareOption{letterpaper}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
+	\PassOptionsToClass\CurrentOption{report}
+	\PassOptionsToClass\CurrentOption{report}
 }
 
 % Equation Alignment
 \DeclareOption{fleqn}{
-	\PassOptionsToClass{\CurrentOption}{report}
 	\PassOptionsToClass{\CurrentOption}{article}
+	\PassOptionsToClass{\CurrentOption}{report}
 }
 \DeclareOption{leqno}{
-	\PassOptionsToClass{\CurrentOption}{report}
 	\PassOptionsToClass{\CurrentOption}{article}
+	\PassOptionsToClass{\CurrentOption}{report}
 }
 
-% Title page options
-\DeclareOption{titlepage}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
+% Line spacing in the main document
+\newcommand\@documentspacing\undefined
+\DeclareOption{singlespacing}{
+	\PassOptionsToPackage{singlespacing}{setspace}
+	\renewcommand\@documentspacing\singlespacing
 }
-\DeclareOption{notitlepage}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
+\DeclareOption{onehalfspacing}{
+	\PassOptionsToPackage{onehalfspacing}{setspace}
+	\renewcommand\@documentspacing\onehalfspacing
+}
+\DeclareOption{doublespacing}{
+	\PassOptionsToPackage{doublespacing}{setspace}
+	\renewcommand\@documentspacing\doublespacing
 }
 
-% Chapter odd or any page start
-\DeclareOption{openright}{
-	\PassOptionsToClass{\CurrentOption}{report}
+% Line spacing for the lists (toc, lof and lot)
+\newcommand\@listspacing\undefined
+\DeclareOption{singlespacelists}{
+	\renewcommand\@listspacing\singlespacing
 }
-\DeclareOption{openany}{
-	\PassOptionsToClass{\CurrentOption}{report}
+\DeclareOption{onehalfspacelists}{
+	\renewcommand\@listspacing\onehalfspacing
+}
+\DeclareOption{doublespacelists}{
+	\renewcommand\@listspacing\doublespacing
+}
+
+% Line spacing for the bibliography
+\newcommand\@bibspacing\undefined
+\DeclareOption{singlespacebib}{
+	\renewcommand\@bibspacing\singlespacing
+}
+\DeclareOption{onehalfspacebib}{
+	\renewcommand\@bibspacing\onehalfspacing
+}
+\DeclareOption{doublespacebib}{
+	\renewcommand\@bibspacing\doublespacing
 }
 
 % Draft mode
 \DeclareOption{draft}{
-	\PassOptionsToClass{\CurrentOption}{report}
 	\PassOptionsToClass{\CurrentOption}{article}
-}
-
-% One or two sided printing
-\DeclareOption{oneside}{
 	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
-
-	\@twosidefalse
-}
-\DeclareOption{twoside}{
-	\PassOptionsToClass{\CurrentOption}{report}
-	\PassOptionsToClass{\CurrentOption}{article}
-
-	\@twosidetrue
 }
 
-% Line spacing
-\DeclareOption{singlespacing}{
-	\AtEndOfClass{\singlespacing}
-}
-\DeclareOption{onehalfspacing}{
-	\AtEndOfClass{\onehalfspacing}
-}
-\DeclareOption{doublespacing}{
-	\AtEndOfClass{\doublespacing}
-}
 
-\DeclareOption{doublespacelists}{
-	\AtEndOfClass{
-		\renewcommand\tocspacing{doublespace}
-		\renewcommand\losspacing{doublespace}
-	}
-}
+%%%%% Header and footer options %%%%%
+\newif\if@header\@headertrue
+\newcommand\@pagenumpos\undefined
 
-% Include copyright page
-\DeclareOption{copyrightpage}{
-	\@copyrightpagetrue
-}
-\DeclareOption{nocopyrightpage}{
-	\@copyrightpagefalse
-}
-
-\newcommand{\bibspacing}{singlespace}
-% Bibliography line spacing
-\DeclareOption{singlespacebib}{ %
-	\renewcommand{\bibspacing}{singlespace}
-}
-\DeclareOption{doublespacebib}{ %
-	\renewcommand{\bibspacing}{doublespace}
-}
-
-% Disable page marks. This happens automatically when the 'proposal' option is
-% used. This also moves the page numbers to the center of the bottom of each
-% page. This might be changed in the future but it will be a bit of work.
+% Completely disables header
 \DeclareOption{nohead}{
-	\@noheadtrue
+	\@headerfalse
+}
+\DeclareOption{pagenumouter}{
+	\renewcommand\@pagenumpos{R}
+}
+\DeclareOption{pagenumcenter}{
+	\renewcommand\@pagenumpos{C}
 }
 
+%%%%% Different modes  or presets%%%%%
+\newif\if@proposal
+\newif\if@microsys
+\newif\if@microe
+\newcommand\@toplevel{chapter}
+\newcommand\@baseclass{report}
 
-% Format as a proposal rather than a thesis
 \DeclareOption{proposal}{
 	\@proposaltrue
-	\@noheadtrue
-	\renewcommand{\@toplevel}{section}
+	\@headerfalse
+	\renewcommand\@baseclass{article}
+	\renewcommand\@toplevel{section}
 }
-
-% Use Microsystems PhD Signature Sheet Format
+\DeclareOption{ms}{
+	\documenttype{Thesis}
+	\degreename[MS]{Master of Science}
+}
+\DeclareOption{phd}{
+	\documenttype{Dissertation}
+	\degreename[PhD]{Doctorate of Philosophy}
+}
+\DeclareOption{microe}{
+	\@microetrue
+	\documenttype{Thesis}
+	\degreefield{Microelectronic Engineering}
+	\degreename[MS]{Master of Science}
+	\college[KGCOE]{Kate Gleason College of Engineering}
+	\department{Department of Electrical and Microelectronic Engineering}
+	\logo{kgcoelogohoriz}
+}
 \DeclareOption{microsys}{
 	\@microsystrue
-	\renewcommand\documentname{Dissertation}
-	\renewcommand\degreename{Doctorate of Philosophy}
-	\renewcommand\degreefield{Microsystems Engineering}
+	\documenttype{Dissertation}
+	\degreefield{Microsystems Engineering}
+	\degreename{PhD}{Doctorate of Philosophy}
+	\college[KGCOE]{Kate Gleason College of Engineering}
+	\department{Microsystems Engineering Department}
+	\logo{kgcoelogovert}
+}
+\DeclareOption{rit}{
+	\city{Rochester, New York}
+	\university[RIT]{Rochester Institute of Technology}
+	\logo{ritlogo}
 }
 
-% Fallback
+%%%%% Fallback %%%%%
+
 \DeclareOption*{
 	\ClassWarning{ritthesis}{Unknown option '\CurrentOption'}
 }
 
+
+
 % Default options
-\ExecuteOptions{12pt,oneside,doublespacing,singlespacebib}
+\ExecuteOptions{letterpaper,12pt,doublespacing,onehalfspacelists,singlespacebib,pagenumouter}
 
 % Process options
 \ProcessOptions\relax
 
-%%%%% Set up environment based on options %%%%%
-\AtEndOfClass{\fancyhf{}}
-\if@nohead
-	\AtEndOfClass{
-		\fancyfoot[C]{\thepage}
-		\renewcommand{\headrulewidth}{0pt}
-	}
-\else
-\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%        Initial Setup        %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \if@proposal
 	\PassOptionsToPackage{left=1in, right=1in, top=1in, bottom=1in}{geometry}
 \else
-	% One or two sided prining (matters for binding purposes)
-	\if@twoside
-		\PassOptionsToPackage{inner=1.5in, outer=1in, top=1in, bottom=1in}{geometry}
-		\if@nohead
-		\else
-			\if@microsys
-				\AtEndOfClass{
-					\fancyfoot[C]{\thepage}
-					\fancyhead[RO]{\footnotesize\textbf\rightmark}
-					\fancyhead[LE]{\footnotesize\textbf\leftmark}
-					\renewcommand{\headrulewidth}{0.7pt}
-					\fancypagestyle{plain}{%
-						\fancyhf{}
-						\fancyfoot[LE,RO]{\thepage}
-						\renewcommand{\headrulewidth}{0pt}
-						\renewcommand{\footrulewidth}{0pt}
-					}
-				}
-			\else
-				\AtEndOfClass{
-					\fancyfoot[LE,RO]{\thepage}
-					\fancyhead[RO]{\footnotesize\textbf\rightmark}
-					\fancyhead[LE]{\footnotesize\textbf\leftmark}
-					\renewcommand{\headrulewidth}{0.7pt}
-					\fancypagestyle{plain}{%
-						\fancyhf{}
-						\fancyfoot[LE,RO]{\thepage}
-						\renewcommand{\headrulewidth}{0pt}
-						\renewcommand{\footrulewidth}{0pt}
-					}
-				}
-			\fi
-		\fi
-	\else
-		\PassOptionsToPackage{left=1.5in, right=1in, top=1in, bottom=1in}{geometry}
-		\if@nohead
-		\else
-			\if@microsys
-				\AtEndOfClass{
-					\fancyfoot[C]{\thepage}
-					\fancyhead[L]{\footnotesize\textbf\leftmark}
-					\renewcommand{\headrulewidth}{0.7pt}
-					\fancypagestyle{plain}{%
-						\fancyhf{}
-						\fancyfoot[R]{\thepage}
-						\renewcommand{\headrulewidth}{0pt}
-						\renewcommand{\footrulewidth}{0pt}
-					}
-				}
-			\else
-				\AtEndOfClass{
-					\fancyfoot[R]{\thepage}
-					\fancyhead[L]{\footnotesize\textbf\leftmark}
-					\renewcommand{\headrulewidth}{0.7pt}
-					\fancypagestyle{plain}{%
-						\fancyhf{}
-						\fancyfoot[R]{\thepage}
-						\renewcommand{\headrulewidth}{0pt}
-						\renewcommand{\footrulewidth}{0pt}
-					}
-				}
-			\fi
-		\fi
+	\PassOptionsToPackage{left=1.5in, right=1in, top=1in, bottom=1in}{geometry}
+\fi
+
+\AtBeginDocument{
+	\pagestyle{fancy}
+	% Reset the header/footer
+	\fancyhf{}
+	% Footer
+	\fancyfoot[\@pagenumpos]{\thepage}
+	% Header
+	\if@header
+		\fancyhead[L]{\footnotesize\textbf\leftmark}
+		\renewcommand{\headrulewidth}{0.7pt}
 	\fi
-\fi
+	% Plain page style
+	\fancypagestyle{plain}{%
+		\fancyhf{}
+		\fancyfoot[\@pagenumpos]{\thepage}
+		\renewcommand{\headrulewidth}{0pt}
+		\renewcommand{\footrulewidth}{0pt}
+		}
+}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Load Base Class %%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\if@proposal
-	\LoadClass{article}
-\else
-	\LoadClass{report}
-\fi
 
-%%%%%%%%%%%%%%%%%%%%
-%%%%% Packages %%%%%
-%%%%%%%%%%%%%%%%%%%%
-% Masters theses at RIT must all be double spaced and look awful
-\RequirePackage{geometry}
-\RequirePackage{titlesec}
-\RequirePackage{setspace}
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-\RequirePackage{longtable}
-\RequirePackage{booktabs}
-\RequirePackage[font=small,labelfont={bf,small}]{caption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%        Load Base Class      %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\LoadClass{\@baseclass}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%           Packages          %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{geometry}			% Set up page margins
+\RequirePackage{titlesec}			% Customize the chapter headings
+\RequirePackage{setspace}			% We needed double spacing
+\RequirePackage{fancyhdr}			% Set up the header and footer
+\RequirePackage{longtable}		% Used for table of symbols
+\RequirePackage{booktabs}			% Used for better \hrule in table of symbols
+\RequirePackage[font=small,labelfont={bf,small}]{caption}	% customize captions
 % If using the subcaption (preferred) package for subfigures, the caption
-% formatting is used
+% formatting is automatically adapted for subcaptions.
 % If using the subfig package instead, the settings must be coppied over.
 \PassOptionsToPackage{font=small,labelfont={bf,small}}{subfig}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Custom Commands %%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Misc. commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%       Custom Commands       %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Misc. Commands %%%%%
 \providecommand{\phantomsection}{}		% Make work with or without hyperref
 
-% Commands for names of things
-\newcommand{\cityname}{Rochester, New York}
-\newcommand{\universityname}{Rochester Institute of Technology}
-\newcommand{\collegename}{Kate Gleason College of Engineering}
-\newcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
-\newcommand{\logo}{kgcoelogohoriz}
+%%%%% Front Matter %%%%%
 
-% Commands for making the frontmatter
-\newcommand{\displaytitle}{\textbf{\Large\@title}}
-\newcommand{\displayauthor}{\textsc{\@author}}
-\newcommand{\maketitlepage}{
+% Commands to track information about the author and document
+\renewcommand\@author{\ClassError{ritthesis}{\protect\@author undefined. Use \protect\author{} to set.}{}}
+\renewcommand\author[1]{\renewcommand\@author{#1}}
+
+\renewcommand\@date\today
+\renewcommand\date[1]{\renewcommand\@date{#1}}
+
+\renewcommand\@title{\ClassError{ritthesis}{\protect\@title undefined. Use \protect\title{} to set.}{}}
+\renewcommand\title[1]{\renewcommand\@title{#1}}
+
+% How things get displayed
+\newcommand\thetitle{\textbf{\Large\@title}}
+\newcommand\theauthor{\textsc{\@author}}
+
+\newcommand\maketitlepage{{
+	\singlespacing
+	\centering
+	\pagestyle{empty}
 	\if@microsys
-		\begin{center}
-			\thispagestyle{empty}
-			\setcounter{page}{0}
-			\ \vspace{-\headheight}\hrule
-			\
-			\vfill
-			
-			\includegraphics[width=0.25\linewidth]{kgcoelogovert}
-			
-			\vfill
-			
-			\displaytitle
-			
-			\hfill\displayauthor\hfill\@advisor{} \textit{Advisor}\hfill{}
-			
-			\vfill
-			
-			A \MakeLowercase{\documentname} submitted in partial fulfillment of the requirements\\
-			for the degree of \degreename{} in \degreefield{}
-			
-			\vfill
-			
-			\degreefield{} Program
-			
-			\collegename
-			
-			\vfill
-			
-			\textit\universityname
-			
-			\textit\cityname
-			
-			\textit\@date
-			
-			\vfill
-			\hrule
-			\cleardoublepage
-		\end{center}
+		\setcounter{page}{0}
+		\ \vspace{-\headheight}\hrule
+		\
+		\vfill
+		
+		\includegraphics[width=0.25\linewidth]{\@logo}
+		
+		\vfill
+		
+		\thetitle
+		
+		\theauthor
+		
+		\vfill
+		
+		A \MakeLowercase{\documentname} submitted in partial fulfillment of the requirements\\
+		for the degree of \degreename\ in \degreefield\
+		
+		\vfill
+		
+		\@degreefield\ Program
+		
+		\@college
+		
+		\vfill
+		
+		\textit\@university
+		
+		\textit\@city
+		
+		\textit\@date
+		
+		\vfill
+		\hrule
+		\cleardoublepage
 	\else
-		\begin{center}
-			\thispagestyle{empty}
-			\setcounter{page}{-1}
-			\ \vspace{-\headheight}\hrule
-			\vfill\vfill
-			\displaytitle
-			
-			\vfill
-			
-			\displayauthor
-			
-			\vfill\vfill
-			\hrule
-			\cleardoublepage\thispagestyle{empty}
-			\ \vspace{-\headheight}\hrule
-			\vfill
-			\displaytitle
-			
-			\displayauthor\\
-			
-			\@date
-			
-			\vfill
-			
-			A Thesis Submitted\\
-			in Partial Fulfillment\\
-			of the Requirements for the Degree of\\
-			\degreename\\
-			in\\
-			\degreefield
-			
-			\vfill
-			
-			\includegraphics[width=15em]{\logo}
-			
-			\vfill
-			
-			\textit\departmentname
-			
-			\vspace{1ex}
-			\hrule
-			\cleardoublepage
-		\end{center}
+		\pagestyle{empty}
+		\setcounter{page}{-1}
+		\ \vspace{-\headheight}\hrule
+		\vfill\vfill
+		\thetitle
+		
+		\vfill
+		
+		\theauthor
+		
+		\vfill\vfill
+		\hrule
+		\cleardoublepage
+		\ \vspace{-\headheight}\hrule
+		\vfill
+		\thetitle
+		
+		\theauthor\\
+		
+		\@date
+		
+		\vfill
+		
+		A Thesis Submitted\\
+		in Partial Fulfillment\\
+		of the Requirements for the Degree of\\
+		\@degree\\
+		in\\
+		\@degreefield
+		
+		\vfill
+		
+		\includegraphics[width=15em]{\@logo}
+		
+		\vfill
+		
+		\textit\@department
+		
+		\vspace{1ex}
+		\hrule
+		\cleardoublepage
 	\fi
-}
+}}
 
 \newcommand{\makesignaturepage}{
 	\phantomsection
