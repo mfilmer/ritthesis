@@ -210,7 +210,7 @@
 	\college[KGCOE]{Kate Gleason College of Engineering}
 	\department{Microsystems Engineering Department}
 	\logo[0.25\linewidth]{kgcoelogovert}
-	\renewcommand*\@certificationmessage{%
+	\renewcommand\@certificationmessage{%
 		We, the undersigned committee members, certify that we have advised and/or
 		supervised the candidate on the work described in this dissertation. We
 		further certify that we have reviewed the dissertation manuscript and
