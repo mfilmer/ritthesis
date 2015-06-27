@@ -83,15 +83,15 @@
 
 % Font Size
 \DeclareOption{10pt}{
-	\PassOptionsToClass\CurrentOption{report}
+	\PassOptionsToClass\CurrentOption{article}
 	\PassOptionsToClass\CurrentOption{report}
 }
 \DeclareOption{11pt}{
-	\PassOptionsToClass\CurrentOption{report}
+	\PassOptionsToClass\CurrentOption{article}
 	\PassOptionsToClass\CurrentOption{report}
 }
 \DeclareOption{12pt}{
-	\PassOptionsToClass\CurrentOption{report}
+	\PassOptionsToClass\CurrentOption{article}
 	\PassOptionsToClass\CurrentOption{report}
 }
 
@@ -223,14 +223,6 @@
 	\else
 	\fi
 }
-
-%%%%% Fallback %%%%%
-
-\DeclareOption*{
-	\ClassWarning{ritthesis}{Unknown option '\CurrentOption'}
-}
-
-
 
 % Default options
 \ExecuteOptions{letterpaper,12pt,doublespacing,onehalfspacelists,singlespacebib,pagenumouter}
@@ -628,11 +620,6 @@
 		\phantomsection
 		% todo: make sure this works
 		\csname\@toplevel\endcsname*{#1}
-		%\if@proposal
-		%	\section*{#1}
-		%\else
-		%	\chapter*{#1}
-		%\fi
 		\addcontentsline{toc}{\@toplevel}{#1}
 		\pagestyle{plain}
 		\centering
