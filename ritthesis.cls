@@ -582,11 +582,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Custom Environments %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewenvironment{abstract}
+\newcommand*\@yesoption{y}
+\newcommand*\@nooption{n}
+\renewenvironment{abstract}[1][y]
 	{%
 		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{\@toplevel}{\abstractname}
+		\newcommand*\@option{#1}
+		\ifx\@option\@yesoption
+			\phantomsection
+			\addcontentsline{toc}{\@toplevel}{\abstractname}
+		\else\ifx\@option\empty
+			\phantomsection
+			\addcontentsline{toc}{\@toplevel}{\abstractname}
+		\fi\fi
 		\pagestyle{plain}
 		\begin{center}
 			\textbf{\large\abstractname}
@@ -595,11 +603,14 @@
 	{\cleardoublepage}
 
 \newcommand{\acknowledgmentsname}{Acknowledgments}
-\newenvironment{acknowledgments}
+\newenvironment{acknowledgments}[1][]
 	{%
 		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{\@toplevel}{\acknowledgmentsname}
+		\newcommand*\@option{#1}
+		\ifx\@option\@yesoption
+			\phantomsection
+			\addcontentsline{toc}{\@toplevel}{\acknowledgmentsname}
+		\fi
 		\pagestyle{plain}
 		\begin{center}
 			\textbf{\large\acknowledgmentsname}
@@ -608,11 +619,14 @@
 	{\cleardoublepage}
 
 \newcommand{\dedicationname}{Dedication}
-\newenvironment{dedication}
+\newenvironment{dedication}[1][]
 	{%
 		\cleardoublepage
-		\phantomsection
-		\addcontentsline{toc}{\@toplevel}{\dedicationname}
+		\newcommand*\@option{#1}
+		\ifx\@option\@yesoption
+			\phantomsection
+			\addcontentsline{toc}{\@toplevel}{\dedicationname}
+		\fi
 		\pagestyle{plain}
 		\centering\itshape
 		\ \vfill%
