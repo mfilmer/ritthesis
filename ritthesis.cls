@@ -71,7 +71,7 @@
 		\renewcommand*\@college{#2}\renewcommand*\@collegeshort{#1}}
 %\fi
 
-\newcommand*\@certificationmessage{}
+\newcommand*\certificationmessage{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%                             %%%%%%%%%%%%%%%
@@ -210,7 +210,7 @@
 	\college[KGCOE]{Kate Gleason College of Engineering}
 	\department{Microsystems Engineering Department}
 	\logo[0.25\linewidth]{kgcoelogovert}
-	\renewcommand\@certificationmessage{%
+	\renewcommand\certificationmessage{%
 		We, the undersigned committee members, certify that we have advised and/or
 		supervised the candidate on the work described in this dissertation. We
 		further certify that we have reviewed the dissertation manuscript and
@@ -502,18 +502,18 @@
 		\vfill
 		\textbf{Committee Approval:}\vspace{0.5em}
 		
-		{\small\@certificationmessage}
+		{\small\certificationmessage}
 		
 		\centering
-		\ifx\@certificationmessage\empty
+		\ifx\certificationmessage\empty
 		\vskip\@committeetablelabelskip
 		\else
-		\vfill\vfill\vfill
+		\vfill\vfill
 		\fi
 		
 		\@makecommitteetable
 		
-		\vfill\vfill
+		\vfill
 	}
 }
 
