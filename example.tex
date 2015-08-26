@@ -111,10 +111,9 @@
 
 \renewcommand\certificationmessage{Here you can insert a certification message. Perhaps something along the lines of ``We the undersigned committee members certify that the student has completed the requirements.'' But you should probably make it sounds better than that.}
 
-% You can customize the length of the signature line by uncommenting and
-% changing the following line. The default is 25em, and is close to the maximum
-% line length
-%\renewcommand{\siglinelength}{25em}
+% You can customize the signature line by redefinding the following:
+% \renewcommand*\@siglinelength\linewidth
+% \setlength\@siglineheight{1pt}
 
 % This command makes testing the proposal option easier
 % it should not be used in a real document
@@ -128,12 +127,18 @@
 % document. Generally is the first thing in the document.
 \frontmatter
 
-% Instead of \makefrontmatter it is possible to do what thath macro does
+% Instead of \frontmatter it is possible to do what that macro does
 % manually, if more control was desired. If that is the case, uncomment and
 % change, or just use the individual macros:
-% \renewcommand{\makefrontmatter}{\maketitlepage\makesignaturepage\makecopyrightpage}
+% \renewcommand{\frontmatter}{\pagenumbering{roman}\maketitlepage\makesignaturepage}
 % Each of these commands can also be changed, but for details on that you
 % should look in ritthesis.cls to see how they are defined
+
+% The following three environments are optional and can be included in any
+% order. Each of these environments has an optional argument to either include
+% or suppress inclusion of the environment in the table of contents. Simply use
+% either 'n' or 'y' to suppress the entry, or include the entry, in the toc.
+% By default, only the abstract is included in the toc.
 
 % The acknowledgments environment will create an acknowledgments section,
 % complete with a correctly spelled title. Change the following to rename
@@ -208,7 +213,7 @@ $\Psi_s$ 		& Surface potential										& V\\
 % This class uses the fancyhdr package to build the headers. You could probably
 % customize the headers by changing the plain page style, as well as the fancy
 % page style. There is no guarantee anything you do works though. (In fact,
-% there isn't even a guarantee anything in ritthesis.cls works either)
+% there isn't a guarantee anything in ritthesis.cls works.)
 
 % Likewise, the chapter and section headers are formatted using the titlesec
 % package. You should be able to customize them by using that package's
@@ -303,7 +308,8 @@ a		& b\\
 
 % Making the bibliography, using the IEEE format. By default the IEEE format
 % won't replace author's names with et al., even when there are a lot of
-% authors. Consult the IEEE LaTeX format documentation for how to change that
+% authors. Consult the IEEE LaTeX format documentation for how to change that,
+% if desired.
 \makebibliography{example}
 
 % The theappendix environment is used when there is only one appendix.
