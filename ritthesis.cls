@@ -174,6 +174,7 @@
 \newif\if@proposal
 \newif\if@microsys
 \newif\if@microe
+\newif\if@cmpe
 \newcommand\@toplevel{chapter}
 \newcommand\@baseclass{report}
 
@@ -201,6 +202,17 @@
 	\logo[15em]{kgcoelogohoriz}
 	\city{Rochester, New York}
 	\university[RIT]{Rochester Institute of Technology}
+}
+\DeclareOption{cmpe}{
+\@cmpetrue
+\documenttype{Thesis}
+\degreefield{Computer Engineering}
+\degreename[MS]{Master of Science}
+\college[KGCOE]{Kate Gleason College of Engineering}
+\department{Department of Computer Engineering}
+\logo[15em]{kgcoelogohoriz}
+\city{Rochester, New York}
+\university[RIT]{Rochester Institute of Technology}
 }
 \DeclareOption{microsys}{
 	\@microsystrue

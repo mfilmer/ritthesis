@@ -1,23 +1,55 @@
 % This class inherits from the LaTeX standard report class and should support
-% all of the options supported by it, as well as a few extra. These extra
+% many of the options supported by it, as well as a few extra. These extra
 % options are described here.
-% Options to adjust line spacing:
+%
+% By default the document uses doublespacing, if this is unsedired, these
+% options are provided:
 % singlespacing, onehalfspacing, doublespacing
-% Only one should be used at a time, and the default is doublespacing
-% By default the three main lists (toc, lof, lot) are single spaced and the list
-% of symbols is 1.5 line spacing. To return these four lists to double spacing
-% use the option:
-% doublespacelists
+%
+% By default the lists: table of contents, list of figures, list of tables and
+% list of symbols (toc, lof, lot, los) use onehalfspacing. This can
+% be overridden with the options:
+% singlespacelists, onehalfspacelists, doublespacelists
+% If different spacing is desired for different lists, the following macros can
+% be redefined t set up the desired spacing:
+% \@tocspacing, \@lofspacing, \@lotspacing, \@losspacing
+% For example:
+% \renewcommand*\@lofspacing\singlespacing
+% Will set single spacing on the list of figures, and the remaining lists will
+% use whatever was set by the class options, or the default.
+%
 % If the microsystems title page and signature sheet should be used:
 % microsys
-% When using this option, only the \specialcommittee, and \certifiedby macros
-% should be used. \certifiedby has the same syntax as \specialcommittee and 
-% should include the list of names to appear under "Certified By" on the 
-% signature sheet. \advisor and \committee should not be used as these don't 
-% provide all the required options for the microsystems signature sheet.
-% Additionally, the \setadvisor macro should be used (in addition to a
-% \specialcommittee for the advisor) to store the advisor's name for use on the
-% title page
+%
+% The bibliography is single spaced by default. If this is undesired, these
+% options will change the bibliography spacing:
+% singlespacebib, onehalfspacebib, doublespacebib
+%
+% Most pages, other than the first page of a chapter or a list, or a special
+% page, such as the signature sheet, have a header showing the current chapter
+% name. This may be undesired, and can be removed with the option:
+% nohead
+%
+% Page numbers are located in the bottom right corner of the page. If instead
+% they should be centered, this option will do so:
+% pagenumcenter
+%
+% This class can also be used to write a proposal. When doing so, the top level
+% sectioning elements are sections rather than chapters, and the document is
+% centered on the page, rather than offset for binding as the thesis is. The
+% proposal formatting can be achieved with the option:
+% proposal
+%
+% In order to create a buildable document, you first must include a lot of
+% information about your school and program, much of this information can be
+% automatically included by using one or more of the following options:
+% ms, phd, microe, microsys, rit
+%
+% If using either 'microe', 'cmpe' or 'microsys', then none of the other options
+% should be necessary. However, if using either the 'ms', or the 'phd' option,
+% 'rit' is likely a desired option as well
+%
+
 \documentclass[microe]{ritthesis}
 
 %%%%%%%%%%%%%%%%%%%%
@@ -35,6 +67,7 @@
 % recommended way to go. This package should not be used unless subfigures or
 % subtables (or any other functionality it provides) is desired. It will not
 % work if the subfig package is used.
+%\usepackage{subfig}
 \usepackage{subcaption}
 
 % Use these commands to set up the author, title, and date
@@ -55,12 +88,14 @@
 % There are also a bunch of other commands that can be changed, were this not
 % a masters thesis in microelectronic engineering at RIT. Those would be the
 % following:
-% \renewcommand{\universityname}{Rochester Institute of Technology}
-% \renewcommand{\collegename}{Kate Gleason College of Engineering}
-% \renewcommand{\departmentname}{Department of Electrical and Microelectronic Engineering}
-% \renewcommand{\logo}{kgcoelogohoriz}
-% \renewcommand{\degreename}{Master of Science}
-% \renewcommand{\degreefield}{Microelectronic Engineering}
+% \renewcommand*{\universityname}{Rochester Institute of Technology}
+% \renewcommand*{\collegename}{Kate Gleason College of Engineering}
+% \renewcommand*{\departmentname}{Department of Electrical and Microelectronic Engineering}
+% \renewcommand*{\logo}{kgcoelogohoriz}
+% \renewcommand*{\degreename}{Master of Science}
+% \renewcommand*{\degreefield}{Microelectronic Engineering}
+% Some or all of these may be set by a class option such as 'microe', 'rit', or
+% 'phd' and are therefore not required in every document.
 
 % Each of these commands can be repeated as many times as necessary
 % Used to create the lines on the signature sheet. There is an optional first
@@ -90,7 +125,7 @@
 \begin{document}
 	
 % This starts the pages that get roman numerals at the beginning of the
-% document. Generally is the first thing in the document. 
+% document. Generally is the first thing in the document.
 \frontmatter
 
 % Instead of \makefrontmatter it is possible to do what thath macro does
@@ -167,7 +202,7 @@ $\Psi_s$ 		& Surface potential										& V\\
 \end{listofsymbols}
 
 % The \mainmatter macro starts the main matter. This starts arabic numbering,
-% and adds a header (except on the first page of a chapter). 
+% and adds a header (except on the first page of a chapter).
 \mainmatter
 
 % This class uses the fancyhdr package to build the headers. You could probably
@@ -184,7 +219,7 @@ $\Psi_s$ 		& Surface potential										& V\\
 
 % Same goes for sections
 \section{First sections aren't as much fun as first comments}
-The first paragraph in a chapter\footnote{and probably section} is not indented. I can probably change this, but it is the \LaTeX{} default. Here is an example of an equation, it is numbered within the chapter. 
+The first paragraph in a chapter\footnote{and probably section} is not indented. I can probably change this, but it is the \LaTeX{} default. Here is an example of an equation, it is numbered within the chapter.
 
 % Equations are numbered within chapters. Typeset them the way you normally do
 \begin{equation}
